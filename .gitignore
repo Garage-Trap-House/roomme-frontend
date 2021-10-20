@@ -26,3 +26,6 @@ yarn-error.log*
 __pycache__/
 venv
 serviceAccountKey.json
+
+.firebase
+.vscode
