@@ -27,5 +27,7 @@ __pycache__/
 venv
 serviceAccountKey.json
 
-.firebase
-.vscode
+/.firebase
+/.vscode
+package-lock.json
+package.json
