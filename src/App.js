@@ -7,10 +7,19 @@ import theme from './theme';
 import logo from './assets/images/Room.me Logo White Crop.png';
 import useStyles from './styles';
 import { grey } from '@mui/material/colors';
+import LoginPage from './components/login'; 
+import { Login } from '@mui/icons-material';
+import './App.css'; 
 
 const App = () => {
   const classes = useStyles();
   return(
+
+    // COMMENT OUT THIS TO VIEW LOGIN PAGE & COMMENT OUT THE NEXT <> BLOCK
+    // <div className="App">  
+    //   <LoginPage/>
+    // </div>
+
     <>
       <ThemeProvider theme={theme}>
       <CssBaseline/>
@@ -45,7 +54,7 @@ const App = () => {
       </div>
       </ThemeProvider>
     </>
-  )
+  );
 }
 
 export default App;
