@@ -17,8 +17,9 @@ const App = () => {
   return(
 
     // COMMENT OUT THIS TO VIEW LOGIN PAGE & COMMENT OUT THE NEXT <> BLOCK
-    <div className="App">  
-      <LoginPage/> 
+    <div className="App">
+      <SignUpPage/>  
+      {/* <LoginPage/>  */}
     </div>
 
     // <>

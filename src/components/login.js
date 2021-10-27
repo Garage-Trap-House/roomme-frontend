@@ -46,7 +46,6 @@ const LoginPage = () => {
             const errorCode = error.code;
             const errorMessage = error.message;
             });
-
         }
     }
 
@@ -84,19 +83,14 @@ const LoginPage = () => {
                         variant='contained' 
                         style={buttonStyle} 
                         fullWidth> 
-                        Sign In 
+                        Sign Up
                     </Button>
 
                     <Typography>
                         <Link href='#'>
-                            Forgot Password?
+                            Already have an account? 
                         </Link>
                     </Typography>
-
-                    <Typography>
-                        <Link href='#'>Sign up</Link>
-                    </Typography>
-                
                 </form>
             </Paper>
         </Grid>
