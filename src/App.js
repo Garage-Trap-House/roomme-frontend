@@ -6,10 +6,12 @@ import FactCheckIcon from '@mui/icons-material/FactCheck';
 import theme from './theme';
 import logo from './assets/images/Room.me Logo White Crop.png';
 import useStyles from './styles';
-import { grey } from '@mui/material/colors';
+import { grey, yellow } from '@mui/material/colors';
 import LoginPage from './components/login'; 
 import { Login } from '@mui/icons-material';
 import './App.css'; 
+import ToDoForm from './components/ToDoForm';
+import ToDoList from './components/ToDoList';
 
 const App = () => {
   const classes = useStyles();
@@ -19,6 +21,12 @@ const App = () => {
     // <div className="App">  
     //   <LoginPage/>
     // </div>
+   
+
+    //todo
+  //  <div className = "App">
+  //    <ToDoList />
+  //  </div>
 
     <>
       <ThemeProvider theme={theme}>
@@ -35,8 +43,15 @@ const App = () => {
 
             <IconButton sx={{ color: grey[50] }}>
               <Badge>
-                <FactCheckIcon />
+                <FactCheckIcon onClick={() => {alert('clicked');
+                  }}
+
+                click me
+                >
+                  </FactCheckIcon>
+                  
               </Badge>
+              
             </IconButton>
 
             <IconButton sx={{ color: grey[50] }}>
