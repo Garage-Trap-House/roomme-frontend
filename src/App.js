@@ -6,8 +6,9 @@ import FactCheckIcon from '@mui/icons-material/FactCheck';
 import theme from './theme';
 import logo from './assets/images/Room.me Logo White Crop.png';
 import useStyles from './styles';
-import { grey, yellow } from '@mui/material/colors';
-import LoginPage from './components/login'; 
+import { grey } from '@mui/material/colors';
+import LoginPage from './components/login';
+import SignUpPage from './components/signup';  
 import { Login } from '@mui/icons-material';
 import './App.css'; 
 import ToDoForm from './components/ToDoForm';
@@ -28,47 +29,40 @@ const App = () => {
   //    <ToDoList />
   //  </div>
 
-    <>
-      <ThemeProvider theme={theme}>
-      <CssBaseline/>
-      <AppBar className = {classes.appBar}>
-        <Toolbar className = {classes.toolBar}>
-          <img src={logo} width="125" height="50"/>
-          <div className = {classes.icons}>
-            <IconButton sx={{ color: grey[50] }}>
-              <Badge>
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+    // <>
+    //   <ThemeProvider theme={theme}>
+    //   <CssBaseline/>
+    //   <AppBar className = {classes.appBar}>
+    //     <Toolbar className = {classes.toolBar}>
+    //       <img src={logo} width="125" height="50"/>
+    //       <div className = {classes.icons}>
+    //         <IconButton sx={{ color: grey[50] }}>
+    //           <Badge>
+    //             <NotificationsIcon />
+    //           </Badge>
+    //         </IconButton>
 
-            <IconButton sx={{ color: grey[50] }}>
-              <Badge>
-                <FactCheckIcon onClick={() => {alert('clicked');
-                  }}
+    //         <IconButton sx={{ color: grey[50] }}>
+    //           <Badge>
+    //             <FactCheckIcon />
+    //           </Badge>
+    //         </IconButton>
 
-                click me
-                >
-                  </FactCheckIcon>
-                  
-              </Badge>
-              
-            </IconButton>
-
-            <IconButton sx={{ color: grey[50] }}>
-              <Badge>
-                <MessageIcon />
-              </Badge>
-            </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
-      <div className={classes.header}>
-      <Typography variant="h1">
-        Room.me work in progress!
-      </Typography>
-      </div>
-      </ThemeProvider>
-    </>
+    //         <IconButton sx={{ color: grey[50] }}>
+    //           <Badge>
+    //             <MessageIcon />
+    //           </Badge>
+    //         </IconButton>
+    //       </div>
+    //     </Toolbar>
+    //   </AppBar>
+    //   <div className={classes.header}>
+    //   <Typography variant="h1">
+    //     Room.me work in progress!
+    //   </Typography>
+    //   </div>
+    //   </ThemeProvider>
+    // </>
   );
 }
 
