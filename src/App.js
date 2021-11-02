@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, CssBaseline, AppBar, Toolbar, ThemeProvider, IconButton, Badge, Box} from '@mui/material';
+import { Typography, CssBaseline, AppBar, Toolbar, ThemeProvider, IconButton, Badge, Box, Switch} from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MessageIcon from '@mui/icons-material/Message';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
@@ -9,25 +9,32 @@ import useStyles from './styles';
 import { grey } from '@mui/material/colors';
 import LoginPage from './components/login';
 import SignUpPage from './components/signup';  
-import { Login } from '@mui/icons-material';
+import { Login, Router } from '@mui/icons-material';
 import './App.css'; 
 import ToDoForm from './components/ToDoForm';
 import ToDoList from './components/ToDoList';
+import { Route, BrowserRouter, Switch as RouterSwitch } from 'react-router-dom';
 
 const App = () => {
   const classes = useStyles();
   return(
 
+    <BrowserRouter>
+      <RouterSwitch>
+        <Route exact path="/">
+          <LoginPage/>
+        </Route>
+        <Route exact path="/signup">
+          <SignUpPage/>
+        </Route>
+      </RouterSwitch>
+    </BrowserRouter>
+
     // COMMENT OUT THIS TO VIEW LOGIN PAGE & COMMENT OUT THE NEXT <> BLOCK
     // <div className="App">  
     //   <LoginPage/>
     // </div>
-   
-
-    //todo
-  //  <div className = "App">
-  //    <ToDoList />
-  //  </div>
+  
 
     // <>
     //   <ThemeProvider theme={theme}>
