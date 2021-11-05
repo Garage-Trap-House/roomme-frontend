@@ -9,6 +9,7 @@ import useStyles from './styles';
 import { grey } from '@mui/material/colors';
 import LoginPage from './components/login';
 import SignUpPage from './components/signup';  
+import HomePage from './components/home';
 import { Login, Router } from '@mui/icons-material';
 import './App.css'; 
 import ToDoForm from './components/ToDoForm';
@@ -21,7 +22,12 @@ const App = () => {
 
     <BrowserRouter>
       <RouterSwitch>
+
         <Route exact path="/">
+          <HomePage/>
+        </Route>
+
+        <Route exact path="/login">
           <LoginPage/>
         </Route>
         <Route exact path="/signup">
