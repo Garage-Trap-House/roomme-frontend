@@ -14,6 +14,7 @@ import { Login, Router } from '@mui/icons-material';
 import './App.css'; 
 import ToDoForm from './components/ToDoForm';
 import ToDoList from './components/ToDoList';
+import Houses from './components/houses';
 import { Route, BrowserRouter, Switch as RouterSwitch } from 'react-router-dom';
 
 const App = () => {
@@ -37,6 +38,10 @@ const App = () => {
 
         <Route exact path="/todo">
           <ToDoList/>
+        </Route>
+
+        <Route exact path="/houses">
+          <Houses/>
         </Route>
 
       </RouterSwitch>
