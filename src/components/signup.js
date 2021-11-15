@@ -92,7 +92,7 @@ const SignUpPage = () => {
 
                     <Router>
                         <Typography align='center'>
-                            <Link href='/'>
+                            <Link href='/login'>
                                 Already have an account?
                             </Link>
                         </Typography>

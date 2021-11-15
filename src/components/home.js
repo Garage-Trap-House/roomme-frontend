@@ -24,10 +24,11 @@ const HomePage = () => {
             </AppBar>
 
             
-            <div style={{marginTop:300, justifyContent:'center', alignItems:'center'}} >
+            <div class='text' style={{marginTop:300, justifyContent:'center', alignItems:'center'}} >
                 <Typography variant='h1'>
                     Welcome to Room.me! 
                 </Typography>
+                
                 <Typography variant='h1'>
                     Here to solve all your roommate issues. 
                 </Typography>

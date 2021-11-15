@@ -30,9 +30,15 @@ const App = () => {
         <Route exact path="/login">
           <LoginPage/>
         </Route>
+
         <Route exact path="/signup">
           <SignUpPage/>
         </Route>
+
+        <Route exact path="/todo">
+          <ToDoList/>
+        </Route>
+
       </RouterSwitch>
     </BrowserRouter>
 

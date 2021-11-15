@@ -81,7 +81,7 @@ const LoginPage = () => {
                     <Grid align='center'>
                         <Avatar style={avatarStyle}><LockIcon /></Avatar>
                         <h2>Welcome to Room.me!</h2>
-                        <h3>Sign in</h3>
+                        <h3>Sign In</h3>
                     </Grid>
 
                     <TextField
@@ -107,35 +107,8 @@ const LoginPage = () => {
                         color='primary'
                         variant='contained'
                         style={buttonStyle}
-                        fullWidth>  
-                        Sign Up
-                        {/* Click={async () => {
-                            const todo = { content };
-                            const response = await fetch("/add_todo", {
-                            method: "POST",
-                            headers: {
-                            'Content-Type' : 'application/json'
-                            },
-                            body: JSON.stringify(todo)
-                            })
-                            if (response.ok){
-                            console.log("it worked")
-                            } */}
-                        {/* onClick = {async() => {
-                                const todo = {content};
-                                const response = await fetch ("/name", {
-                                    method: "POST",
-                                    headers: {
-                                    'Content-Type' : 'application/json'
-                                    },
-                                    body: JSON.stringify(todo)
-                                })
-                                if (response.ok){
-                                    console.log("it worked")
-                            }
-                        }}  */}
-
-                        
+                        fullWidth>
+                        Sign In
                     </Button>
 
                     <Router>
@@ -158,7 +131,7 @@ const LoginPage = () => {
 
                     <Switch>
                         <Route exact path="/signup">
-                            <SignUpPage />
+                            <SignUpPage/>
                         </Route>
                     </Switch>
 
