@@ -1,14 +1,88 @@
 import { ClassNames } from '@emotion/react';
-import { AppBar, Toolbar, Typography, Button } from '@mui/material'
+import { AppBar, Toolbar, Typography, Button, Modal, Box, Grid, Avatar, TextField, Link } from '@mui/material'
 import { useTheme } from '@mui/private-theming'
-import React from 'react'
+//import React from 'react'
 import logo from '../assets/images/Room.me Logo White Crop.png';
-
+import React, { useState } from 'react'
+import LockIcon from '@mui/icons-material/Lock'
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
+import { initializeApp } from 'firebase/app'
+//import Modal from '@material-ui/core/Modal';
+import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
 
 
 const HomePage = () => {
 
     const theme = useTheme()
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const avatarStyle = { backgroundColor: '#97D8C4' }
+    const buttonStyle = { margin: '8px 0 ' }
+
+    const [Email, setEmail] = useState('')
+    const [Password, setPassword] = useState('')
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyC1u5LF8UdxWJEkFB1k4y4iA4Njv1c8yck",
+        authDomain: "cs-4800-project.firebaseapp.com",
+        databaseURL: "https://cs-4800-project-default-rtdb.firebaseio.com",
+        projectId: "cs-4800-project",
+        storageBucket: "cs-4800-project.appspot.com",
+        messagingSenderId: "90582600538",
+        appId: "1:90582600538:web:66fbed6394f54ce7848163",
+        measurementId: "G-KZ94TTK7E9"
+    };
+
+    const app = initializeApp(firebaseConfig);
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault() // prevent default makes it so the page doesn't refresh upon submission
+
+        if (Email && Password) {
+            var email = Email
+            var pass = Password
+            console.log(email, pass)
+
+            const auth = getAuth();
+            signInWithEmailAndPassword(auth, email, pass)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                });
+
+            createUserWithEmailAndPassword(auth, email, pass)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+            });
+        }
+    }
 
     return (
         <div>
@@ -17,11 +91,104 @@ const HomePage = () => {
                     <img src={logo} width="125" height="50" flex />
 
                     <Typography type='Title' color='inherit' style={{ flex: 1 }} />
+                    {/*<Button color="inherit" href="/login">Login</Button>
+                    <Button color="inherit" href ="/signup">Sign Up</Button>*/}
                     
-                    <Button color="inherit" href="/login">Login</Button>
-                    <Button color="inherit" href ="/signup">Sign Up</Button>
+                    <Button onClick={handleOpen} color="inherit">Sign Up</Button>
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                        >
+
+                        <Box sx={style}>
+                            <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+                                <Grid align='center'>
+                                    <Avatar style={avatarStyle}><LockIcon /></Avatar>
+                                    <h2>Sign up for Room.me!</h2>
+                                </Grid>
+
+                                <TextField
+                                    label='Email'
+                                    placeholder='Enter Email'
+                                    margin='normal'
+                                    fullWidth
+                                    required
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+
+                                <TextField
+                                    label='Password'
+                                    placeholder='Enter Password'
+                                    type='password'
+                                    fullWidth
+                                    required
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+
+                                <Button
+                                    type='submit'
+                                    color='primary'
+                                    variant='contained'
+                                    style={buttonStyle}
+                                    fullWidth>
+                                    Create Account
+                                </Button>
+                            </form>
+                        </Box>
+                    </Modal>
+
+                    <Button onClick={handleOpen} color="inherit">Login</Button>
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                        >
+
+                        <Box sx={style}>
+                            <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+                            <Grid align='center'>
+                        <Avatar style={avatarStyle}><LockIcon /></Avatar>
+                        <h2>Welcome to Room.me!</h2>
+                        <h3>Sign In</h3>
+                    </Grid>
+
+                    <TextField
+                        label='Email'
+                        placeholder='Enter Email'
+                        margin='normal'
+                        fullWidth
+                        required
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+
+                    <TextField
+                        label='Password'
+                        placeholder='Enter Password'
+                        type='password'
+                        fullWidth
+                        required
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+
+                    <Button
+                        type='submit'
+                        color='primary'
+                        variant='contained'
+                        style={buttonStyle}
+                        fullWidth>
+                        Login
+                    </Button>
+
+                    
+
+                            </form>
+                        </Box>
+                    </Modal>
+            
+                    
                 </Toolbar>
             </AppBar>
+
+            
 
             
             <div class='text' style={{marginTop:300, justifyContent:'center', alignItems:'center'}} >

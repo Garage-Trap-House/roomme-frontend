@@ -90,7 +90,7 @@ const LoginPage = () => {
                         Sign Up
                     </Button>
 
-                    <Router>
+                    {/* <Router>
                         <Typography align='center'>
                             <Link href='/signup'>
                                 Don't have an account?
@@ -103,16 +103,16 @@ const LoginPage = () => {
                             </Link>
                         </Typography>
 
-                        {/* <Button component={RouterLink} to='/signup'>
+                        <Button component={RouterLink} to='/signup'>
                             Don't have an account?
-                        </Button> */}
+                        </Button> 
                     </Router>
 
                     <Switch>
                         <Route exact path="/signup">
                             <SignUpPage/>
                         </Route>
-                    </Switch>
+                    </Switch> */}
 
 
 
