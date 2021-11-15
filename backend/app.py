@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, url_for, render_template, jsonify
 from flask.templating import render_template
 from flask_cors import CORS
+
 import json
 
 app = Flask(__name__, template_folder= 'template')
@@ -33,6 +34,7 @@ def nameRoute():
         return ''
     else:       
         return jsonify({'name': response})
+
 
 if __name__ == '__main__':
     app.run(debug = True)

@@ -31,6 +31,15 @@ const LoginPage = () => {
     const [Email, setEmail] = useState('')
     const [Password, setPassword] = useState('')
 
+    /*userEffect() =>{
+        fetch('http://127.0.0.1:5000/name'),{
+            'methods': 'GET', 
+            headers : {
+                'Content - Type': 'application/json'
+            }
+        }
+    }*/
+
     const handleSubmit = (e) => {
         e.preventDefault() // prevent default makes it so the page doesn't refresh upon submission
 
@@ -50,7 +59,19 @@ const LoginPage = () => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                 });
-        }
+            
+            // send it to flask 
+        //     const response = await fetch("/name", {
+        //         method: "POST",
+        //         headers: {
+        //         'Content-Type' : 'application/json'
+        //         },
+        //         body: JSON.stringify(email)
+        //         })
+        //         if (response.ok){
+        //         console.log("it worked")
+
+        // }
     }
 
     return (
@@ -86,8 +107,35 @@ const LoginPage = () => {
                         color='primary'
                         variant='contained'
                         style={buttonStyle}
-                        fullWidth>
+                        fullWidth>  
                         Sign Up
+                        {/* Click={async () => {
+                            const todo = { content };
+                            const response = await fetch("/add_todo", {
+                            method: "POST",
+                            headers: {
+                            'Content-Type' : 'application/json'
+                            },
+                            body: JSON.stringify(todo)
+                            })
+                            if (response.ok){
+                            console.log("it worked")
+                            } */}
+                        {/* onClick = {async() => {
+                                const todo = {content};
+                                const response = await fetch ("/name", {
+                                    method: "POST",
+                                    headers: {
+                                    'Content-Type' : 'application/json'
+                                    },
+                                    body: JSON.stringify(todo)
+                                })
+                                if (response.ok){
+                                    console.log("it worked")
+                            }
+                        }}  */}
+
+                        
                     </Button>
 
                     <Router>
@@ -129,5 +177,5 @@ const LoginPage = () => {
             </Paper>
         </Grid>
     )
-}
+}}
 export default LoginPage
