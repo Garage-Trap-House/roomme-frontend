@@ -19,7 +19,7 @@ const HomePage = () => {
                     <Typography type='Title' color='inherit' style={{ flex: 1 }} />
                     
                     <Button color="inherit" href="/login">Login</Button>
-                    <Button color="inherit">Sign Up</Button>
+                    <Button color="inherit" href ="/signup">Sign Up</Button>
                 </Toolbar>
             </AppBar>
 
