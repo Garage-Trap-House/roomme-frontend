@@ -2,12 +2,11 @@ import { ClassNames } from '@emotion/react';
 import { AppBar, Toolbar, Typography, Button, Modal, Box, Grid, Avatar, TextField, Link } from '@mui/material'
 import { useTheme } from '@mui/private-theming'
 //import React from 'react'
+import Axios from 'axios';
 import logo from '../assets/images/Room.me Logo White Crop.png';
 import React, { useState } from 'react'
 import LockIcon from '@mui/icons-material/Lock'
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
-import { initializeApp } from 'firebase/app'
-//import Modal from '@material-ui/core/Modal';
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
 
 
@@ -45,32 +44,32 @@ const HomePage = () => {
         messagingSenderId: "90582600538",
         appId: "1:90582600538:web:66fbed6394f54ce7848163",
         measurementId: "G-KZ94TTK7E9"
-    };
+      };
 
-    const app = initializeApp(firebaseConfig);
-
+    //const app = initializeApp(firebaseConfig);
 
     const handleSubmit = (e) => {
         e.preventDefault() // prevent default makes it so the page doesn't refresh upon submission
 
         if (Email && Password) {
             var email = Email
-            var pass = Password
-            console.log(email, pass)
+            var password = Password
+            console.log(email, password)
 
             const auth = getAuth();
-            signInWithEmailAndPassword(auth, email, pass)
-                .then((userCredential) => {
-                    // Signed in 
-                    const user = userCredential.user;
-                    // ...
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                });
+            // signInWithEmailAndPassword(auth, email, password)
+            //     .then((userCredential) => {
+            //         // Signed in 
+            //         const user = userCredential.user;
+                    
+            //         // ...
+            //     })
+            //     .catch((error) => {
+            //         const errorCode = error.code;
+            //         const errorMessage = error.message;
+            //     });
 
-            createUserWithEmailAndPassword(auth, email, pass)
+            createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
@@ -81,7 +80,17 @@ const HomePage = () => {
                 const errorMessage = error.message;
                 // ..
             });
+
         }
+    }
+
+    const createAccount = () => {
+        Axios.post('http://localhost:3001/createAccount', {
+                        Email:Email, 
+                        Password:Password,
+                        }).then(()=>{
+                        console.log("success")
+                });
     }
 
     return (
@@ -137,7 +146,7 @@ const HomePage = () => {
                         </Box>
                     </Modal>
 
-                    <Button onClick={handleOpen} color="inherit">Login</Button>
+                    <Button onClick={handleOpen} color="inherit">Sign Up</Button>
                         <Modal
                             open={open}
                             onClose={handleClose}

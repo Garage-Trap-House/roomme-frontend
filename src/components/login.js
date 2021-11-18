@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Grid, Paper, Link, Avatar, TextField, Button, Typography } from '@mui/material'
 import LockIcon from '@mui/icons-material/Lock'
+//import Axios from 'axios';
 import { typography } from '@mui/system'
 import { CalendarViewDay } from '@mui/icons-material'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
@@ -12,18 +13,18 @@ import SignUpPage from './signup'
 
 const LoginPage = () => {
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyC1u5LF8UdxWJEkFB1k4y4iA4Njv1c8yck",
-        authDomain: "cs-4800-project.firebaseapp.com",
-        databaseURL: "https://cs-4800-project-default-rtdb.firebaseio.com",
-        projectId: "cs-4800-project",
-        storageBucket: "cs-4800-project.appspot.com",
-        messagingSenderId: "90582600538",
-        appId: "1:90582600538:web:66fbed6394f54ce7848163",
-        measurementId: "G-KZ94TTK7E9"
-    };
+    // const firebaseConfig = {
+    //     apiKey: "AIzaSyC1u5LF8UdxWJEkFB1k4y4iA4Njv1c8yck",
+    //     authDomain: "cs-4800-project.firebaseapp.com",
+    //     databaseURL: "https://cs-4800-project-default-rtdb.firebaseio.com",
+    //     projectId: "cs-4800-project",
+    //     storageBucket: "cs-4800-project.appspot.com",
+    //     messagingSenderId: "90582600538",
+    //     appId: "1:90582600538:web:66fbed6394f54ce7848163",
+    //     measurementId: "G-KZ94TTK7E9"
+    // };
 
-    const app = initializeApp(firebaseConfig);
+    //const app = initializeApp(firebaseConfig);
     const paperStyle = { padding: 50, height: '250', width: 280, margin: "90px auto" }
     const avatarStyle = { backgroundColor: '#97D8C4' }
     const buttonStyle = { margin: '8px 0 ' }
@@ -50,6 +51,7 @@ const LoginPage = () => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                 });
+
         }
     }
 
