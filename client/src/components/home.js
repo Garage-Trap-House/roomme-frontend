@@ -7,19 +7,26 @@ import logo from '../assets/images/Room.me Logo White Crop.png';
 import React, { useState } from 'react'
 import LockIcon from '@mui/icons-material/Lock'
 import * as firebase from "firebase/app"
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth"
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence} from "firebase/auth"
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
-
+import Profile from './profile';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import {withRouter} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 
 const HomePage = () => {
 
+    let history = useHistory();
     const theme = useTheme()
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const [open1, setOpen1] = React.useState(false);
+    const handleOpen1 = () => setOpen1(true);
+    const handleClose1 = () => setOpen1(false);
 
     const avatarStyle = { backgroundColor: '#97D8C4' }
     const buttonStyle = { margin: '8px 0 ' }
@@ -63,17 +70,6 @@ const HomePage = () => {
             console.log(email, password)
 
             const auth = getAuth();
-            // signInWithEmailAndPassword(auth, email, password)
-            //     .then((userCredential) => {
-            //         // Signed in 
-            //         const user = userCredential.user;
-                    
-            //         // ...
-            //     })
-            //     .catch((error) => {
-            //         const errorCode = error.code;
-            //         const errorMessage = error.message;
-            //     });
 
             createUserWithEmailAndPassword(auth,email, password)
             .then((userCredential) => {
@@ -81,6 +77,7 @@ const HomePage = () => {
                 //createAccount();
                 const user = userCredential.user;
                 const userid = user.uid
+                history.push('/profile');
                 //console.log("User ID :- ", user.uid);
                 // ...
 
@@ -98,7 +95,20 @@ const HomePage = () => {
                 // ..
             });
 
-
+            setPersistence(auth, browserSessionPersistence)
+            .then(() => {
+            // Existing and future Auth states are now persisted in the current
+            // session only. Closing the window would clear any existing state even
+            // if a user forgets to sign out.
+            // ...
+            // New sign-in will be persisted with session persistence.
+            return signInWithEmailAndPassword(auth, email, password);
+            })
+            .catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
         }
     }
     
@@ -115,6 +125,9 @@ const HomePage = () => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
+                    console.log("success");
+                    history.push('/profile');
+                    //this.props.history.push('/profile');
                     
                     // ...
                 })
@@ -122,31 +135,21 @@ const HomePage = () => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                 });
-
-            // createUserWithEmailAndPassword(auth,email, password)
-            // .then((userCredential) => {
-            //     // Signed in 
-            //     //createAccount();
-            //     const user = userCredential.user;
-            //     const userid = user.uid
-            //     //console.log("User ID :- ", user.uid);
-            //     // ...
-
-            //     Axios.post('http://localhost:3001/createAccount', {
-            //              email, 
-            //              password,
-            //              userid,
-            //             }).then(()=>{
-            //             console.log("success")
-            // });
-            // })
-            // .catch((error) => {
-            //     const errorCode = error.code;
-            //     const errorMessage = error.message;
-            //     // ..
-            // });
-
-
+        
+            setPersistence(auth, browserSessionPersistence)
+            .then(() => {
+            // Existing and future Auth states are now persisted in the current
+            // session only. Closing the window would clear any existing state even
+            // if a user forgets to sign out.
+            // ...
+            // New sign-in will be persisted with session persistence.
+            return signInWithEmailAndPassword(auth, email, password);
+            })
+            .catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
         }
     }
 
@@ -161,10 +164,7 @@ const HomePage = () => {
                     <Button color="inherit" href ="/signup">Sign Up</Button>*/}
                     
                     <Button onClick={handleOpen} color="inherit">Sign Up</Button>
-                        <Modal
-                            open={open}
-                            onClose={handleClose}
-                        >
+                        <Modal open={open} onClose={handleClose}>
 
                         <Box sx={style}>
                             <form noValidate autoComplete='off' onSubmit={handleSignUpSubmit}>
@@ -198,15 +198,16 @@ const HomePage = () => {
                                     style={buttonStyle}
                                     fullWidth>
                                     Create Account
+                                    
                                 </Button>
                             </form>
                         </Box>
                     </Modal>
 
-                    <Button onClick={handleOpen} color="inherit">Login</Button>
+                    <Button onClick={handleOpen1} color="inherit">Login</Button>
                         <Modal
-                            open={open}
-                            onClose={handleClose}
+                            open={open1}
+                            onClose={handleClose1}
                         >
 
                         <Box sx={style}>
@@ -236,12 +237,17 @@ const HomePage = () => {
                     />
 
                     <Button
+                        onClick={() => { console.log('onClick'); }}
                         type='submit'
                         color='primary'
                         variant='contained'
                         style={buttonStyle}
                         fullWidth>
                         Login
+                        {/* <Router>
+                            <Link component={RouterLink} to ='/profile'>
+                            </Link>
+                            </Router> */}
                     </Button>
 
                     
@@ -273,4 +279,4 @@ const HomePage = () => {
 
     )
 }
-export default HomePage
+export default withRouter(HomePage)

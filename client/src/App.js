@@ -45,6 +45,10 @@ const App = () => {
           <Houses/>
         </Route>
 
+        <Route exact path="/profile">
+          <Profile/>
+        </Route>
+
       </RouterSwitch>
     </BrowserRouter>
 

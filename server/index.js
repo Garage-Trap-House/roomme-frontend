@@ -16,6 +16,7 @@ app.use(express.json())
 
 const serviceAccount = require('./ServiceAccountKey.json');
 const admin = require('firebase-admin');
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   //databaseURL: "https://cs-4800-project-default.firebaseio.com"
@@ -59,6 +60,28 @@ app.post('/createAccount' , (req, res) => {
 
   //console.log(password, email);
   return db.collection('testingusers').doc(userid).set(account)
+
+})
+
+app.post('/checkHouses', (req, res) => {
+  const email = req.body.email;
+  const userid = req.body.userid;
+
+  console.log(userid)
+  const docRef = db.collection('testingusers').doc(userid);
+
+  docRef.get().then(function(doc) {
+    if (doc.exists) {
+      var data = doc.data();
+      console.log(data.houses)
+      //console.log("Document data:", doc.data());
+
+    } else {
+      console.log("No such document!");
+    }
+  }).catch(function(error) {
+    console.log("Error getting document:", error);
+  });
 
 })
 

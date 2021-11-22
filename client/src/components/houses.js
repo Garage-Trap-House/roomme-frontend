@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { AppBar, Toolbar, Typography, Button, Modal, Box, Grid, Avatar, TextField, Link, Card, CardMedia, CardActionArea } from '@mui/material'
 import logo from '../assets/images/Room.me Logo White Crop.png';
 import turtle from '../assets/images/turtle.png';
+import Axios from 'axios';
 import cowboyturtle from '../assets/images/cowboy_turtle.jpg';
 import LockIcon from '@mui/icons-material/Lock'
 import "./houses.css"
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 
 
 
@@ -15,6 +17,11 @@ const Houses = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const avatarStyle = { backgroundColor: '#97D8C4' }
+
+    const auth = getAuth();
+    const email = String(auth.currentUser.email);
+    
+    const userid = auth.currentUser.uid;
    
     
     const style = {
@@ -28,6 +35,16 @@ const Houses = () => {
         boxShadow: 24,
         p: 4,
     };
+
+
+    // need to check if this works
+    Axios.post('http://localhost:3001/checkHouses', {
+        email, 
+        userid
+        }).then(()=>{
+        console.log("success")
+    });
+
 
 
 
