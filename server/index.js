@@ -55,7 +55,7 @@ app.post('/createAccount' , (req, res) => {
   var account = {
     "Email": JSON.stringify(email),
     "Password": JSON.stringify(password)
-  }
+}
 
   //console.log(password, email);
   return db.collection('testingusers').doc(userid).set(account)

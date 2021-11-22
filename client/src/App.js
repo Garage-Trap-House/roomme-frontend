@@ -15,6 +15,7 @@ import './App.css';
 import ToDoForm from './components/ToDoForm';
 import ToDoList from './components/ToDoList';
 import Houses from './components/houses';
+import Profile from './components/profile';
 import { Route, BrowserRouter, Switch as RouterSwitch } from 'react-router-dom';
 
 const App = () => {

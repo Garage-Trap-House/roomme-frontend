@@ -54,7 +54,7 @@ const HomePage = () => {
     const db = getFirestore(app);
     
 
-    const handleSubmit = (e) => {
+    const handleSignUpSubmit = (e) => {
         e.preventDefault() // prevent default makes it so the page doesn't refresh upon submission
 
         if (Email && Password) {
@@ -100,7 +100,55 @@ const HomePage = () => {
 
 
         }
-    }   
+    }
+    
+    const handleLoginSubmit = (e) => {
+        e.preventDefault() // prevent default makes it so the page doesn't refresh upon submission
+
+        if (Email && Password) {
+            var email = Email
+            var password = Password
+            console.log(email, password)
+
+            const auth = getAuth();
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                });
+
+            // createUserWithEmailAndPassword(auth,email, password)
+            // .then((userCredential) => {
+            //     // Signed in 
+            //     //createAccount();
+            //     const user = userCredential.user;
+            //     const userid = user.uid
+            //     //console.log("User ID :- ", user.uid);
+            //     // ...
+
+            //     Axios.post('http://localhost:3001/createAccount', {
+            //              email, 
+            //              password,
+            //              userid,
+            //             }).then(()=>{
+            //             console.log("success")
+            // });
+            // })
+            // .catch((error) => {
+            //     const errorCode = error.code;
+            //     const errorMessage = error.message;
+            //     // ..
+            // });
+
+
+        }
+    }
 
     return (
         <div>
@@ -119,7 +167,7 @@ const HomePage = () => {
                         >
 
                         <Box sx={style}>
-                            <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+                            <form noValidate autoComplete='off' onSubmit={handleSignUpSubmit}>
                                 <Grid align='center'>
                                     <Avatar style={avatarStyle}><LockIcon /></Avatar>
                                     <h2>Sign up for Room.me!</h2>
@@ -155,14 +203,14 @@ const HomePage = () => {
                         </Box>
                     </Modal>
 
-                    {/* <Button onClick={handleOpen} color="inherit">Login</Button>
+                    <Button onClick={handleOpen} color="inherit">Login</Button>
                         <Modal
                             open={open}
                             onClose={handleClose}
                         >
 
                         <Box sx={style}>
-                            <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+                            <form noValidate autoComplete='off' onSubmit={handleLoginSubmit}>
                             <Grid align='center'>
                         <Avatar style={avatarStyle}><LockIcon /></Avatar>
                         <h2>Welcome to Room.me!</h2>
@@ -200,7 +248,7 @@ const HomePage = () => {
 
                             </form>
                         </Box>
-                    </Modal> */}
+                    </Modal>
             
                     
                 </Toolbar>
