@@ -6,8 +6,12 @@ import Axios from 'axios';
 import logo from '../assets/images/Room.me Logo White Crop.png';
 import React, { useState } from 'react'
 import LockIcon from '@mui/icons-material/Lock'
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
+import * as firebase from "firebase/app"
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth"
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
+
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
 
 const HomePage = () => {
@@ -38,7 +42,7 @@ const HomePage = () => {
     const firebaseConfig = {
         apiKey: "AIzaSyC1u5LF8UdxWJEkFB1k4y4iA4Njv1c8yck",
         authDomain: "cs-4800-project.firebaseapp.com",
-        databaseURL: "https://cs-4800-project-default-rtdb.firebaseio.com",
+        //databaseURL: "https://cs-4800-project-default-rtdb.firebaseio.com",
         projectId: "cs-4800-project",
         storageBucket: "cs-4800-project.appspot.com",
         messagingSenderId: "90582600538",
@@ -46,7 +50,9 @@ const HomePage = () => {
         measurementId: "G-KZ94TTK7E9"
       };
 
-    //const app = initializeApp(firebaseConfig);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    
 
     const handleSubmit = (e) => {
         e.preventDefault() // prevent default makes it so the page doesn't refresh upon submission
@@ -69,11 +75,22 @@ const HomePage = () => {
             //         const errorMessage = error.message;
             //     });
 
-            createUserWithEmailAndPassword(auth, email, password)
+            createUserWithEmailAndPassword(auth,email, password)
             .then((userCredential) => {
                 // Signed in 
+                //createAccount();
                 const user = userCredential.user;
+                const userid = user.uid
+                //console.log("User ID :- ", user.uid);
                 // ...
+
+                Axios.post('http://localhost:3001/createAccount', {
+                         email, 
+                         password,
+                         userid,
+                        }).then(()=>{
+                        console.log("success")
+            });
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -81,17 +98,9 @@ const HomePage = () => {
                 // ..
             });
 
-        }
-    }
 
-    const createAccount = () => {
-        Axios.post('http://localhost:3001/createAccount', {
-                        Email:Email, 
-                        Password:Password,
-                        }).then(()=>{
-                        console.log("success")
-                });
-    }
+        }
+    }   
 
     return (
         <div>
@@ -146,7 +155,7 @@ const HomePage = () => {
                         </Box>
                     </Modal>
 
-                    <Button onClick={handleOpen} color="inherit">Sign Up</Button>
+                    {/* <Button onClick={handleOpen} color="inherit">Login</Button>
                         <Modal
                             open={open}
                             onClose={handleClose}
@@ -191,7 +200,7 @@ const HomePage = () => {
 
                             </form>
                         </Box>
-                    </Modal>
+                    </Modal> */}
             
                     
                 </Toolbar>
