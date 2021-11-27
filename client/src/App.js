@@ -17,8 +17,11 @@ import ToDoList from './components/ToDoList';
 import Houses from './components/houses';
 import Profile from './components/profile';
 import { Route, BrowserRouter, Switch as RouterSwitch } from 'react-router-dom';
+import { initializeApp } from 'firebase/app'
+import HouseMates from './components/housemates';
 
 const App = () => {
+
   const classes = useStyles();
   return(
 
@@ -47,6 +50,10 @@ const App = () => {
 
         <Route exact path="/profile">
           <Profile/>
+        </Route>
+
+        <Route exact path="/housemates">
+          <HouseMates/>
         </Route>
 
       </RouterSwitch>

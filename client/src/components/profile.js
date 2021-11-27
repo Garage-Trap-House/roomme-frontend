@@ -50,6 +50,9 @@ const Profile = () => {
             </AppBar>
             <div className="avatar">
                 <Avatar sx={{ height: '190px', width: '190px' }} src={cowboyturtle} />
+                
+            </div>
+            <div className = "welcomeText">
                 <h1> Welcome {userName}! </h1>
             </div>
 
@@ -58,6 +61,12 @@ const Profile = () => {
                     <Button variant='contained' style={{ minHeight: '80px', minWidth: '450px', fontSize: '20px' }}>
                         Change Name
                     </Button>
+
+                    {/* <Modal open={open} onClose={handleClose}>
+                        <Box>
+                            <form noValidate autoComplete='off' onSubmit={change}
+                        </Box>
+                    </Modal> */}
 
                     <Button variant='contained' style={{ minHeight: '80px', minWidth: '450px', fontSize: '20px' }}>
                         Leave House
