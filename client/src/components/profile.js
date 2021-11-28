@@ -4,6 +4,8 @@ import logo from '../assets/images/Room.me Logo White Crop.png';
 import cowboyturtle from '../assets/images/cowboy_turtle.jpg';
 import "./profile.css"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
+import {useLocation} from 'react-router-dom';
+import Axios from 'axios';
 
 //<Link to ='/href' ></Link>
 
@@ -13,24 +15,37 @@ import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'reac
 
 const Profile = () => {
 
+    const location = useLocation();
+    console.log(location.state.name)
+    const useruid = location.state.name
+    const [userName, setName] = useState("");
     let history = useHistory();
-    const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-              // User is signed in, see docs for a list of available properties
-              // https://firebase.google.com/docs/reference/js/firebase.User
-              const uid = user.uid;
-              console.log(uid);
-              const userCheck = auth.currentUser.email;
-              console.log(userCheck);
-              // ...
-            } else {
 
-            history.push('/');
-              // User is signed out
-              // ...
-            }
-          });
+    function getName(){
+        Axios.post('http://localhost:3001/getName', {
+        useruid:useruid
+        }).then((response)=>{
+        setName(response.data)
+    });
+    }
+    
+    //const auth = getAuth();
+        // onAuthStateChanged(auth, (user) => {
+        //     if (user) {
+        //       // User is signed in, see docs for a list of available properties
+        //       // https://firebase.google.com/docs/reference/js/firebase.User
+        //       const uid = user.uid;
+        //       console.log(uid);
+        //       const userCheck = auth.currentUser.email;
+        //       console.log(userCheck);
+        //       // ...
+        //     } else {
+
+        //     history.push('/');
+        //       // User is signed out
+        //       // ...
+        //     }
+        //   });
 
         // auth.onAuthStateChanged(function(user) {
         // if (user) {
@@ -38,7 +53,8 @@ const Profile = () => {
         // }
         // });
 
-    const userName = String(auth.currentUser.email)
+    //const userName = "hi"
+    //const userName = String(auth.currentUser.email)
 
 
     return (
@@ -52,7 +68,9 @@ const Profile = () => {
                 <Avatar sx={{ height: '190px', width: '190px' }} src={cowboyturtle} />
                 
             </div>
+           
             <div className = "welcomeText">
+                <Button onClick={getName}> Name </Button>
                 <h1> Welcome {userName}! </h1>
             </div>
 
@@ -72,7 +90,7 @@ const Profile = () => {
                         Leave House
                     </Button>
 
-                    <Button variant='contained'  onClick={() => {history.push("/houses");}} style={{ minHeight: '80px', minWidth: '450px', fontSize: '20px' }}>
+                    <Button variant='contained'  onClick={() => history.push({pathname:"/houses", state:{id:1,name:useruid}})} style={{ minHeight: '80px', minWidth: '450px', fontSize: '20px' }}>
                         Houses
                     </Button>
 
