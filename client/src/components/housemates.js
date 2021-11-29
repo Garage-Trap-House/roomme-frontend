@@ -7,6 +7,7 @@ import "./housemates.css"
 import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCircle';
 import { useLocation } from 'react-router-dom';
 import Axios from 'axios';
+import { Style } from '@mui/icons-material';
 
 const HouseMates = () => {
 
@@ -79,23 +80,21 @@ const HouseMates = () => {
                 )}
 
             </div>
-            <div>
+            <div className='addButton'>
                 <Button onClick={handleOpen} variant='contained'>+</Button>
                 <Modal open={open} onClose={handleClose}>
-                    <Grid align='center'>
-                        <h2>Add a Housemate</h2>
-                    </Grid>
                     <Box sx={style}>
-                        {/* <form>
-                            <TextField
-                                label='Housemate Name'
-                                placeholder='Enter Housemate Name'
-                                margin='normal'
-                                fullWidth
-                                required
-                                onChange={(e) => setAddedHouseMate(e.target.value)} />
-                        </form> */}
-
+                        <Grid align = 'center'>
+                            <h2>Add House</h2>
+                        </Grid>
+                        <TextField
+                        label='House Name'
+                        placeholder='Enter House Name'
+                        margin = 'normal'
+                        fullWidth
+                        required
+                        onChange={(e) => setAddedHouseMate(e.target.value)}
+                        />
                     </Box>
                 </Modal>
             </div>

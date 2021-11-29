@@ -26,8 +26,8 @@ const ToDoList2 = () => {
             <div className='housemate'>
                 <Typography sx={{ fontSize: 23 }}>Housemate 1 Name</Typography>
                 <FormGroup>
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-                        <FormControlLabel disabled control={<Checkbox />} label="Disabled" />
+                        <FormControlLabel control={<Checkbox/>} label="Todo Item #1" />
+                        <FormControlLabel control={<Checkbox/>} label="Todo Item #2" />
                 </FormGroup>
             </div>
 
