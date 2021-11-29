@@ -34,8 +34,8 @@ const Profile = () => {
 
 
     const location = useLocation();
-    console.log(location.state.name)
-    const useruid = location.state.name
+    console.log(location.state.username)
+    const useruid = location.state.username
     const [userName, setName] = useState("");
     let history = useHistory();
 
@@ -129,7 +129,7 @@ const Profile = () => {
                         Leave House
                     </Button>
 
-                    <Button variant='contained' onClick={() => history.push({ pathname: "/houses", state: { id: 1, name: useruid } })} style={{ minHeight: '80px', minWidth: '450px', fontSize: '20px' }}>
+                    <Button variant='contained' onClick={() => history.push({ pathname: "/houses", state: { id: 1, username: useruid } })} style={{ minHeight: '80px', minWidth: '450px', fontSize: '20px' }}>
                         Houses
                     </Button>
 

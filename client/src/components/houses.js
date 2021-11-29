@@ -10,8 +10,6 @@ import { useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 
-
-
 const Houses = () => {
 
     const [open, setOpen] = React.useState(false);
@@ -21,8 +19,8 @@ const Houses = () => {
     const avatarStyle = { backgroundColor: '#97D8C4' }
 
     const location = useLocation();
-    console.log(location.state.name)
-    const useruid = location.state.name
+    const useruid = location.state.username
+    console.log(useruid)
 
     // const auth = getAuth();
     // const email = String(auth.currentUser.email);
@@ -46,7 +44,7 @@ const Houses = () => {
 
     function getHouses() {
         Axios.post('http://localhost:3001/checkHouses', {
-            useruid
+            useruid:useruid
         }).then((response) => {
             setHouse(response.data)
         });
@@ -66,7 +64,7 @@ const Houses = () => {
                     Houses
                 </Typography>
                 {houses.map((house) =>
-                    <CardActionArea component={RouterLink} to={{ pathname: "/housemates", state: { id: 1, name: { house } } }} >
+                    <CardActionArea component={RouterLink} to={{ pathname: "/housemates", state: { id: 1, housename: house , username: useruid } }} >
 
                         <Card raised='true' sx={{ display: 'flex' }} style={{ marginBottom: "50px" }}>
 

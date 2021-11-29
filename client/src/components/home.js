@@ -78,7 +78,7 @@ const HomePage = () => {
                 const user = userCredential.user;
                 const userid = user.uid
                 //history.push('/profile');
-                history.push({pathname:"/profile", state:{id:1,name:userid}})
+                history.push({pathname:"/profile", state:{id:1,username:userid}})
                 //console.log("User ID :- ", user.uid);
                 // ...
 
@@ -129,7 +129,7 @@ const HomePage = () => {
                     console.log("success");
                     //history.push('/profile');
                     const userid = user.uid
-                    history.push({pathname:"/profile", state:{id:1,name:userid}})
+                    history.push({pathname:"/profile", state:{id:1,username:userid}})
                     //this.props.history.push('/profile');
                     
                     // ...

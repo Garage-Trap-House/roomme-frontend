@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { AppBar, Toolbar, Typography, Button, IconButton, Modal, Box, Grid, Avatar, TextField, Link, Card, CardMedia, CardActionArea, Stack, AvatarGroup } from '@mui/material'
 import logo from '../assets/images/Room.me Logo White Crop.png';
+import OtherHousesIcon from '@mui/icons-material/OtherHouses';
 import cowboyturtle from '../assets/images/cowboy_turtle.jpg';
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
 import "./housemates.css"
@@ -12,8 +13,10 @@ import { Style } from '@mui/icons-material';
 const HouseMates = () => {
 
     const location = useLocation();
-    const house = location.state.name
-    const housename = house.house
+    const house = location.state.housename
+    console.log(house)
+    const useruid = location.state.username
+    console.log(location.state.username)
     // var obj = JSON.parse(housename)
     // housename = obj.house
     const [housemates, setHousemates] = useState([]);
@@ -36,7 +39,7 @@ const HouseMates = () => {
 
     function getHousemates() {
         Axios.post('http://localhost:3001/getHousemates', {
-            housename: housename
+            housename: house
         }).then((response) => {
             //houses = response.data
             setHousemates(response.data)
@@ -47,12 +50,18 @@ const HouseMates = () => {
 
     return (
         <div>
-            <AppBar position="fixed">
+           <AppBar style={{ background: '#6B9AC4' }} position="fixed">
                 <Toolbar display='flex'>
                     <img src={logo} width="125" height="50" flex />
                     <Typography type='Title' color='inherit' style={{ flex: 1 }} />
 
-                    <IconButton href='/todo'>
+                    <IconButton style={{color: 'white'}} component={RouterLink} to={{ pathname: "/houses", state: { id: 1, housename: house , username: useruid } }}>
+                        <OtherHousesIcon />
+                    </IconButton>
+                    <IconButton style={{color: 'white'}} href='/todo'>
+                        <PlaylistAddCheckCircleIcon />
+                    </IconButton>
+                    <IconButton style={{color: 'white'}} href='/todo'>
                         <PlaylistAddCheckCircleIcon />
                     </IconButton>
                 </Toolbar>
