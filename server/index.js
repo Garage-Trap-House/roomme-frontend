@@ -18,6 +18,7 @@ app.use(express.json())
 
 const serviceAccount = require('./ServiceAccountKey.json');
 const admin = require('firebase-admin');
+const FieldValue = require('firebase-admin').firestore.FieldValue;
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -40,45 +41,89 @@ db.settings({ ignoreUndefinedProperties: true })
 // const app = initializeApp(firebaseConfig);
 // const db = getFirestore(app);
 
-app.post('/todo', (req, res) =>{
-  const todo = req.body.todo
-
-  var to = {
-    "action": JSON.stringify(todo)
-  }
-  console.log(todo)
-  return db.collection('cities').doc('LA1').set(to);
-})
-
-
 app.post('/createAccount' , (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  const userid = req.body.userid;
+  const useruid = req.body.useruid;
   var account = {
     "Email": JSON.stringify(email),
     "Password": JSON.stringify(password)
-}
+  } 
 
-  //console.log(password, email);
-  return db.collection('testingusers').doc(userid).set(account)
+  return db.collection('testingusers').doc(useruid).set(account)
 
 })
 
 app.post('/getName' , (req, res) => {
   const useruid = req.body.useruid
-
   const docRef = db.collection('testingusers').doc(useruid)
 
   docRef.get().then(function(doc) {
     if (doc.exists) {
       var data = doc.data();
-
       emailAddress = data.Email
-      
-      console.log(emailAddress)
 
       res.send(emailAddress)
+
+    } else {
+      console.log("No such document!");
+    }
+  }).catch(function(error) {
+    console.log("Error getting document:", error);
+  });
+})
+
+app.post('/createHouse' , (req, res) => {
+  const useruid = req.body.useruid
+  const housename = req.body.housename
+
+  const nameRef = db.collection('testingusers').doc(useruid)
+  nameRef.get().then(function(doc) {
+    if (doc.exists) {
+      var data = doc.data();
+      const emailAddress = data.Email
+
+      const housemates = {
+        housemates: [emailAddress]
+      } 
+
+      const newHouse = "/testinghouses/" + housename
+      let houseRef = db.doc(newHouse)
+      db.collection('testinghouses').doc(housename).set(housemates)
+
+      const docRef = db.collection('testingusers').doc(useruid)
+      docRef.update({
+        houses: FieldValue.arrayUnion(houseRef)
+      });
+
+
+    } else {
+      console.log("No such document!");
+    }
+  }).catch(function(error) {
+    console.log("Error getting document:", error);
+  });
+
+})
+
+
+app.post('/addHousemates' , (req, res) => {
+  const useruid = req.body.useruid
+  const housename = req.body.housename
+  const newEmail = req.body.newEmail
+
+  db.collection('testingusers').where('Email', '==', newEmail)
+
+})
+
+app.post('/getChores' , (req, res) => {
+  const housename = req.body.housename
+
+  const docRef = db.collection('testingtodo').doc(housename)
+  docRef.get().then(function(doc) {
+    if (doc.exists) {
+      var data = doc.data();
+      console.log(data)
 
     } else {
       console.log("No such document!");
@@ -91,7 +136,6 @@ app.post('/getName' , (req, res) => {
 app.post('/checkHouses', (req, res) => {
   const useruid = req.body.useruid;
 
-  //console.log(userid)
   const docRef = db.collection('testingusers').doc(useruid);
 
   docRef.get().then(function(doc) {
@@ -100,7 +144,6 @@ app.post('/checkHouses', (req, res) => {
       house = data.houses
       amtOfHouse = house.length
       var array = []
-
 
       for (let i = 0; i < amtOfHouse; i++){
         var bruh = []
@@ -111,25 +154,6 @@ app.post('/checkHouses', (req, res) => {
       }
 
       res.send(array)
-
-      // const houseRef = db.doc(house)
-      
-
-      // houseRef.get().then(function(doc1){
-      //   if(doc1.exists){
-      //     var data = doc1.data();
-      //     //console.log(data.housemate1)
-      //   }
-      // }).catch(function(error) {
-      // console.log("Error getting document:", error);
-      // });
-
-      // Attach an asynchronous callback to read the data at our posts reference
-      // ref.on('value', (snapshot) => {
-      //   console.log(snapshot.val());
-      // }, (errorObject) => {
-      //   console.log('The read failed: ' + errorObject.name);
-      // }); 
 
     } else {
       console.log("No such document!");
@@ -142,38 +166,14 @@ app.post('/checkHouses', (req, res) => {
 
 app.post('/getHousemates', (req, res) => {
   const housename = req.body.housename;
-
-  //console.log(userid)
   const docRef = db.collection('testinghouses').doc(housename);
 
   docRef.get().then(function(doc) {
     if (doc.exists) {
       var data = doc.data();
-
       housematesName = data.housemates
-      
-      //console.log(data.housemates)
 
       res.send(housematesName)
-
-      // const houseRef = db.doc(house)
-      
-
-      // houseRef.get().then(function(doc1){
-      //   if(doc1.exists){
-      //     var data = doc1.data();
-      //     //console.log(data.housemate1)
-      //   }
-      // }).catch(function(error) {
-      // console.log("Error getting document:", error);
-      // });
-
-      // Attach an asynchronous callback to read the data at our posts reference
-      // ref.on('value', (snapshot) => {
-      //   console.log(snapshot.val());
-      // }, (errorObject) => {
-      //   console.log('The read failed: ' + errorObject.name);
-      // }); 
 
     } else {
       console.log("No such document!");
