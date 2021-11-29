@@ -19,6 +19,7 @@ import Profile from './components/profile';
 import { Route, BrowserRouter, Switch as RouterSwitch } from 'react-router-dom';
 import { initializeApp } from 'firebase/app'
 import HouseMates from './components/housemates';
+import ToDoList2 from'./components/ToDoList2'; 
 
 const App = () => {
 
@@ -41,7 +42,7 @@ const App = () => {
         </Route>
 
         <Route exact path="/todo">
-          <ToDoList/>
+          <ToDoList2/>
         </Route>
 
         <Route exact path="/houses">

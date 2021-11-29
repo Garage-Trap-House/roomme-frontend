@@ -5,7 +5,7 @@ import cowboyturtle from '../assets/images/cowboy_turtle.jpg';
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
 import "./housemates.css"
 import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCircle';
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Axios from 'axios';
 
 const HouseMates = () => {
@@ -16,14 +16,30 @@ const HouseMates = () => {
     // var obj = JSON.parse(housename)
     // housename = obj.house
     const [housemates, setHousemates] = useState([]);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [open, setOpen] = React.useState(false);
+    const [name, setAddedHouseMate] = useState('')
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
 
     function getHousemates() {
         Axios.post('http://localhost:3001/getHousemates', {
-        housename:housename
-        }).then((response)=>{
-        //houses = response.data
-        setHousemates(response.data)
-    });
+            housename: housename
+        }).then((response) => {
+            //houses = response.data
+            setHousemates(response.data)
+        });
     }
 
 
@@ -36,7 +52,7 @@ const HouseMates = () => {
                     <Typography type='Title' color='inherit' style={{ flex: 1 }} />
 
                     <IconButton href='/todo'>
-                        <PlaylistAddCheckCircleIcon/>
+                        <PlaylistAddCheckCircleIcon />
                     </IconButton>
                 </Toolbar>
             </AppBar>
@@ -49,19 +65,39 @@ const HouseMates = () => {
             </div>
 
             <div className='avatars'>
-            {housemates.map((housemate) => 
-                <Grid container direction="row" alignItems='center'>
-                    <Grid item>
-                        <Avatar alt="Cowboy Turtle" sx={{ height: '190px', width: '190px', marginBottom: '30px', marginRight: '20px' }} src={cowboyturtle} />
+                {housemates.map((housemate) =>
+                    <Grid container direction="row" alignItems='center'>
+                        <Grid item>
+                            <Avatar alt="Cowboy Turtle" sx={{ height: '190px', width: '190px', marginBottom: '30px', marginRight: '20px' }} src={cowboyturtle} />
+                        </Grid>
+                        <Grid item>
+                            <Typography style={{ fontSize: 18 }}>
+                                {housemate}
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <Typography style={{ fontSize: 18 }}>
-                            {housemate}
-                        </Typography>
-                    </Grid>
-                </Grid>
-            )}
+                )}
 
+            </div>
+            <div>
+                <Button onClick={handleOpen} variant='contained'>+</Button>
+                <Modal open={open} onClose={handleClose}>
+                    <Grid align='center'>
+                        <h2>Add a Housemate</h2>
+                    </Grid>
+                    <Box sx={style}>
+                        {/* <form>
+                            <TextField
+                                label='Housemate Name'
+                                placeholder='Enter Housemate Name'
+                                margin='normal'
+                                fullWidth
+                                required
+                                onChange={(e) => setAddedHouseMate(e.target.value)} />
+                        </form> */}
+
+                    </Box>
+                </Modal>
             </div>
         </div>
 

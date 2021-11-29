@@ -6,14 +6,14 @@ import Axios from 'axios';
 import cowboyturtle from '../assets/images/cowboy_turtle.jpg';
 import LockIcon from '@mui/icons-material/Lock'
 import "./houses.css"
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 
 
 
 const Houses = () => {
-    
+
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -26,10 +26,10 @@ const Houses = () => {
 
     // const auth = getAuth();
     // const email = String(auth.currentUser.email);
-    
+
     // const userid = auth.currentUser.uid;
-   
-    
+
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -42,14 +42,16 @@ const Houses = () => {
         p: 4,
     };
 
+    const[houseName, setHouseName] = useState('')
+
     function getHouses() {
         Axios.post('http://localhost:3001/checkHouses', {
-        useruid
-        }).then((response)=>{
-        setHouse(response.data)
-    });
+            useruid
+        }).then((response) => {
+            setHouse(response.data)
+        });
     }
-    
+
     return (
         <div>
             <AppBar position="fixed">
@@ -63,9 +65,9 @@ const Houses = () => {
                 <Typography variant='h3'>
                     Houses
                 </Typography>
-                    {houses.map((house) => 
-                    <CardActionArea component={RouterLink} to={{pathname:"/housemates", state:{id:1,name:{house}}}} >
-                        
+                {houses.map((house) =>
+                    <CardActionArea component={RouterLink} to={{ pathname: "/housemates", state: { id: 1, name: { house } } }} >
+
                         <Card raised='true' sx={{ display: 'flex' }} style={{ marginBottom: "50px" }}>
 
                             <CardMedia
@@ -73,18 +75,18 @@ const Houses = () => {
                                 style={{ height: "150px", width: "200px", paddingTop: "2%", alignItems: "left" }}
                                 sx={{ width: 200 }}
                                 image={turtle}>
-                            </CardMedia>                            
-                                <Box>
-                                <Typography variant="subtitle1" color="text.secondary" component="div" key = {house}>
+                            </CardMedia>
+                            <Box>
+                                <Typography variant="subtitle1" color="text.secondary" component="div" key={house}>
                                     {house}
                                 </Typography>
-                                    </Box>
-                        </Card> 
-                    </CardActionArea> )}
+                            </Box>
+                        </Card>
+                    </CardActionArea>)}
 
-                
 
-            {/* <Button onClick={handleOpen}> 
+
+                {/* <Button onClick={handleOpen}> 
                 <Card >
                     <CardActionArea  >
 
@@ -118,6 +120,29 @@ const Houses = () => {
                 </Card>
 
                 </Button> */}
+
+            </div>
+
+            <div>
+                <Button variant='contained' onClick={handleOpen}>
+                    Create House
+                </Button>
+
+                <Modal open={open} onClose={handleClose}>
+                    <Box sx={style}>
+                        <Grid align='center'>
+                            <h2>Add House</h2>
+                        </Grid>
+                        <TextField
+                            label='House Name'
+                            placeholder='Enter House Name'
+                            margin='normal'
+                            fullWidth
+                            required
+                            onChange={(e) => setHouseName(e.target.value)}
+                            />
+                    </Box>
+                </Modal>
 
             </div>
         </div>
