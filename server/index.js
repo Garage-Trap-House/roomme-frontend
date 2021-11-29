@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 
+//https://stackoverflow.com/questions/47876754/query-firestore-database-for-document-id
+
 // https://abhik-b.medium.com/short-guide-to-firestore-reference-data-type-9c9197e4b9ee
 
 app.use(cors({
@@ -19,6 +21,8 @@ app.use(express.json())
 const serviceAccount = require('./ServiceAccountKey.json');
 const admin = require('firebase-admin');
 const FieldValue = require('firebase-admin').firestore.FieldValue;
+const { snapshotConstructor } = require('firebase-functions/v1/firestore')
+const { DataSnapshot } = require('firebase-functions/v1/database')
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -96,6 +100,13 @@ app.post('/createHouse' , (req, res) => {
         houses: FieldValue.arrayUnion(houseRef)
       });
 
+      const todoListName = "todolist - " + emailAddress
+      console.log(todoListName)
+      const todoList = {
+        [todoListName] : [emailAddress]
+      }
+      db.collection('testingtodo').doc(housename).set(todoList)
+
 
     } else {
       console.log("No such document!");
@@ -107,22 +118,38 @@ app.post('/createHouse' , (req, res) => {
 })
 
 
-app.post('/addHousemates' , (req, res) => {
-  const useruid = req.body.useruid
-  const housename = req.body.housename
-  const newEmail = req.body.newEmail
+// app.post('/addHousemates' , (req, res) => {
+//   const useruid = req.body.useruid
+//   const housename = req.body.housename
+//   const newEmail = req.body.newEmail
 
-  db.collection('testingusers').where('Email', '==', newEmail)
+//   const docRef = db.collection('testingusers').doc(useruid)
 
-})
+//   docRef.get().then(function(doc) {
+//     if (doc.exists) {
+//       const docRef = db.collection('testinghouses').doc(housename)
+//       docRef.update({
+//         housemates: FieldValue.arrayUnion(newEmail)
+//       });      
+
+//     } else {
+//       console.log("error try again")
+//     }
+//   }).catch(function(error) {
+//     console.log("Error getting document:", error);
+//   });
+
+// })
 
 app.post('/getChores' , (req, res) => {
   const housename = req.body.housename
+  const name = req.body.name
+  
+  const docRef = db.collection('testingtodo').doc(housename).collection(name).doc('todolist')
 
-  const docRef = db.collection('testingtodo').doc(housename)
   docRef.get().then(function(doc) {
     if (doc.exists) {
-      var data = doc.data();
+      var data = doc.data()
       console.log(data)
 
     } else {
@@ -131,7 +158,105 @@ app.post('/getChores' , (req, res) => {
   }).catch(function(error) {
     console.log("Error getting document:", error);
   });
+
+
+  /////////////////////////////////////////////////
+
+  // const docRef = db.collection('testingtodo').doc(housename)
+  // docRef.get().then(function(doc) {
+  //   if (doc.exists) {
+  //     var data = doc.data();
+  //     const blah = "todolist - " + "11@gmail.com" 
+  //     //console.log(blah)
+  //     const chore = data.blah
+  //     //console.log(chore)
+  //     console.log(data)
+
+  //     res.send(data)
+
+  //   } else {
+  //     console.log("No such document!");
+  //   }
+  // }).catch(function(error) {
+  //   console.log("Error getting document:", error);
+  // });
+
+  //////////////////////////////////////////////////////
+
+  // var subcollection = []
+  // var hi = []
+  // const houseRef = db.collection('testinghouses').doc(housename)
+  // houseRef.get().then(function(doc) {
+  //   if (doc.exists) {
+  //     var data = doc.data();
+  //     housematesName = data.housemates
+  //     amtOfhousemates = housematesName.length
+  //     //console.log(amtOfhousemates)
+
+  //     const docRef = db.collection('testingtodo').doc(housename)
+  //     docRef.listCollections().then(collections => {
+  //       //for (let collection of collections) {
+          
+  //         for (let i = 0; i < amtOfhousemates; i++){
+  //           //console.log(`Found collection with id: ${collections[i].id}`);
+  //           subcollection[i] = collections[i].id
+
+
+            
+
+  //           const name = db.collection('testingtodo').doc(housename).collection(subcollection[i]).doc('todolist')
+
+  //             name.get().then(function (doc) {
+  //               if (doc.exists) {
+  //                 var data = doc.data();
+
+  //                 //hi[i] = subcollection[i] + " " + data.chores
+
+  //                 const hu = {
+  //                   [subcollection[i]]: [data.chores]
+  //                 }
+
+  //                 const j = [subcollection[i], data.chores]
+
+
+                 
+  //                 // if (subcollection[i] = amtOfhousemates){
+  //                 //   res.send(hu)
+  //                 // }
+
+  //               } else {
+  //                 console.log("No such document!");
+  //               }
+                
+  //               //res.send(hi)
+  //             }).catch(function (error) {
+  //               console.log("Error getting document:", error);
+  //             })
+  //         }
+  //     });
+
+  //   } else {
+  //     console.log("No such document!");
+  //   }
+  // }).catch(function(error) {
+  //   console.log("Error getting document:", error);
+  // });
 })
+
+app.post('/addChores' , (req, res) => {
+  const housename = req.body.housename
+  const task = req.body.task
+  const assignedTo = req.body.assignedTo
+
+  const docRef = db.collection('testingtodo').doc(housename).collection(assignedTo).doc('todolist')
+
+  docRef.update({
+    chores: FieldValue.arrayUnion(task)
+  });
+
+})
+
+
 
 app.post('/checkHouses', (req, res) => {
   const useruid = req.body.useruid;
