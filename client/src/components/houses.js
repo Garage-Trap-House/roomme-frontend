@@ -122,7 +122,7 @@ const Houses = () => {
             </div>
 
             <div>
-                <Button variant='contained' onClick={handleOpen}>
+                <Button style={{backgroundColor: "#6B9AC4"}}variant='contained' onClick={handleOpen}>
                     Create House
                 </Button>
 

@@ -59,10 +59,10 @@ const HouseMates = () => {
                     <IconButton style={{color: 'white'}} component={RouterLink} to={{ pathname: "/houses", state: { id: 1, housename: house , username: useruid } }}>
                         <OtherHousesIcon />
                     </IconButton>
-                    <IconButton style={{color: 'white'}} href='/todo'>
+                    <IconButton style={{color: 'white'}} component={RouterLink} to={{ pathname: "/todo", state: { id: 1, housename: house , username: useruid } }}>
                         <PlaylistAddCheckCircleIcon />
                     </IconButton>
-                    <IconButton style={{color: 'white'}} href='/todo'>
+                    <IconButton style={{color: 'white'}} component={RouterLink} to={{ pathname: "/profile", state: { username: useruid } }}>
                         <PersonIcon />
                     </IconButton>
                 </Toolbar>
@@ -91,7 +91,7 @@ const HouseMates = () => {
 
             </div>
             <div className='addButton'>
-                <Button onClick={handleOpen} variant='contained'>+</Button>
+                <Button style={{backgroundColor: "#6B9AC4"}} onClick={handleOpen} variant='contained'>+</Button>
                 <Modal open={open} onClose={handleClose}>
                     <Box sx={style}>
                         <Grid align = 'center'>

@@ -29,7 +29,7 @@ const Profile = () => {
         boxShadow: 24,
         p: 4,
     };
-    const buttonStyle = { margin: '8px 0 ' }
+    const buttonStyle = { margin: '8px 0 ', backgroundColor: "#6B9AC4" }
     const [name, setChangeName] = useState('')
 
 
@@ -94,7 +94,7 @@ const Profile = () => {
 
             <div className="button">
                 <Stack spacing={4} sx={{ width: '190px' }}>
-                    <Button onClick={handleOpen} variant='contained' style={{ minHeight: '80px', minWidth: '450px', fontSize: '20px' }}>
+                    <Button onClick={handleOpen} variant='contained' style={{ minHeight: '80px', minWidth: '450px', fontSize: '20px', backgroundColor: "#6B9AC4" }}>
                         Change Name
                     </Button>
 
@@ -125,11 +125,11 @@ const Profile = () => {
                         </Box>
                     </Modal>
 
-                    <Button variant='contained' style={{ minHeight: '80px', minWidth: '450px', fontSize: '20px' }}>
+                    <Button variant='contained' style={{ minHeight: '80px', minWidth: '450px', fontSize: '20px', backgroundColor: "#6B9AC4"}}>
                         Leave House
                     </Button>
 
-                    <Button variant='contained' onClick={() => history.push({ pathname: "/houses", state: { id: 1, username: useruid } })} style={{ minHeight: '80px', minWidth: '450px', fontSize: '20px' }}>
+                    <Button variant='contained' onClick={() => history.push({ pathname: "/houses", state: { id: 1, username: useruid } })} style={{ minHeight: '80px', minWidth: '450px', fontSize: '20px', backgroundColor: "#6B9AC4" }}>
                         Houses
                     </Button>
 
