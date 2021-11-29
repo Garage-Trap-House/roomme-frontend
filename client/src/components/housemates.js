@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AppBar, Toolbar, Typography, Button, IconButton, Modal, Box, Grid, Avatar, TextField, Link, Card, CardMedia, CardActionArea, Stack, AvatarGroup } from '@mui/material'
 import logo from '../assets/images/Room.me Logo White Crop.png';
 import OtherHousesIcon from '@mui/icons-material/OtherHouses';
+import PersonIcon from '@mui/icons-material/Person';
 import cowboyturtle from '../assets/images/cowboy_turtle.jpg';
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
 import "./housemates.css"
@@ -62,7 +63,7 @@ const HouseMates = () => {
                         <PlaylistAddCheckCircleIcon />
                     </IconButton>
                     <IconButton style={{color: 'white'}} href='/todo'>
-                        <PlaylistAddCheckCircleIcon />
+                        <PersonIcon />
                     </IconButton>
                 </Toolbar>
             </AppBar>

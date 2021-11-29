@@ -46,6 +46,7 @@ const HomePage = () => {
         p: 4,
     };
 
+
     const firebaseConfig = {
         apiKey: "AIzaSyC1u5LF8UdxWJEkFB1k4y4iA4Njv1c8yck",
         authDomain: "cs-4800-project.firebaseapp.com",
@@ -158,7 +159,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <AppBar position="fixed">
+            <AppBar style={{ background: '#6B9AC4' }} position="fixed">
                 <Toolbar display='flex'>
                     <img src={logo} width="125" height="50" flex />
 

@@ -52,7 +52,7 @@ const Houses = () => {
 
     return (
         <div>
-            <AppBar position="fixed">
+            <AppBar style={{ background: '#6B9AC4' }} position="fixed">
                 <Toolbar display='flex'>
                     <img src={logo} width="125" height="50" flex />
 
