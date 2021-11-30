@@ -50,6 +50,16 @@ const Houses = () => {
         });
     }
 
+    function createHouse() {
+        Axios.post('http://localhost:3001/createHouse', {
+            useruid:useruid,
+            housename:houseName
+        }).then((response) => {
+            setHouse(response.data)
+        });
+        setOpen(false);
+    }
+
     return (
         <div>
             <AppBar style={{ background: '#6B9AC4' }} position="fixed">
@@ -139,6 +149,7 @@ const Houses = () => {
                             required
                             onChange={(e) => setHouseName(e.target.value)}
                             />
+                        <Button onClick = {createHouse}> Submit </Button>
                     </Box>
                 </Modal>
 
