@@ -77,7 +77,9 @@ const HouseMates = () => {
 
             <div className='avatars'>
                 {housemates.map((housemate) =>
+                
                     <Grid container direction="row" alignItems='center'>
+                        <Button component={RouterLink} to={{ pathname: "/todo", state: { id: 1, username: useruid, todouser: housemate, housename: house} }}>
                         <Grid item>
                             <Avatar alt="Cowboy Turtle" sx={{ height: '190px', width: '190px', marginBottom: '30px', marginRight: '20px' }} src={cowboyturtle} />
                         </Grid>
@@ -86,7 +88,9 @@ const HouseMates = () => {
                                 {housemate}
                             </Typography>
                         </Grid>
+                        </Button> 
                     </Grid>
+               
                 )}
 
             </div>

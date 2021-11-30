@@ -48,13 +48,13 @@ db.settings({ ignoreUndefinedProperties: true })
 app.post('/createAccount' , (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  const useruid = req.body.useruid;
+  const useruid = req.body.userid;
   var account = {
     "Email": JSON.stringify(email),
     "Password": JSON.stringify(password)
   } 
 
-  return db.collection('testingusers').doc(useruid).set(account)
+  db.collection('testingusers').doc(useruid).set(account)
 
 })
 
@@ -150,7 +150,8 @@ app.post('/getChores' , (req, res) => {
   docRef.get().then(function(doc) {
     if (doc.exists) {
       var data = doc.data()
-      console.log(data)
+      console.log(data.chores)
+      res.send(data.chores)
 
     } else {
       console.log("No such document!");
