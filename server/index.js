@@ -100,12 +100,18 @@ app.post('/createHouse' , (req, res) => {
         houses: FieldValue.arrayUnion(houseRef)
       });
 
-      const todoListName = "todolist - " + emailAddress
-      console.log(todoListName)
-      const todoList = {
-        [todoListName] : [emailAddress]
+      // const todoListName = "todolist - " + emailAddress
+      // console.log(todoListName)
+      // const todoList = {
+      //   [todoListName] : [emailAddress]
+      // }
+      // db.collection('testingtodo').doc(housename).set(todoList)
+
+      const chore = {
+        chores : ['check the todo list']
       }
-      db.collection('testingtodo').doc(housename).set(todoList)
+
+      db.collection('testingtodo').doc(housename).collection(emailAddress).doc('todolist').set(chore)
 
 
     } else {
@@ -253,6 +259,19 @@ app.post('/addChores' , (req, res) => {
 
   docRef.update({
     chores: FieldValue.arrayUnion(task)
+  });
+
+})
+
+app.post('/deleteChores' , (req, res) => {
+  const housename = req.body.housename
+  const task = req.body.task
+  const assignedTo = req.body.assignedTo
+
+  const docRef = db.collection('testingtodo').doc(housename).collection(assignedTo).doc('todolist')
+
+  docRef.update({
+    chores: FieldValue.arrayRemove(task)
   });
 
 })
