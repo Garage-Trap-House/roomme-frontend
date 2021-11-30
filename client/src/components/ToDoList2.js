@@ -60,6 +60,37 @@ const ToDoList2 = () => {
         setOpen(false)
     }
 
+    function checkName1(){
+        Axios.post('http://localhost:3001/getName', {
+            useruid: useruid
+        }).then((response) => {
+            setName(response.data)
+        });
+        deleteChores(userName)
+    }
+
+    function deleteChores(userName) {
+        console.log(location.state.task + "hi")
+        // console.log(userName + 'hi')
+        // console.log(taskName)
+        // Axios.post('http://localhost:3001/deleteChores', {
+        //     housename: house,
+        //     assignedTo: userName,
+        //     task: todo
+        // }).then((response) => {
+        //     //houses = response.data
+        //     setToDo(response.data)
+        //     console.log('success')
+        // });
+        // setOpen(false)
+    }
+
+    const handleChange = (e) =>{
+        let isChecked= e.target.checked;
+        console.log(isChecked +'hi')
+        console.log(e.target)
+    }
+
     function getToDo() {
         Axios.post('http://localhost:3001/getChores', {
             housename: house,
@@ -118,7 +149,7 @@ const ToDoList2 = () => {
                 <Typography sx={{ fontSize: 23 }}>{userToDo}</Typography>
                 {todoList.map((todo) =>
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox />} label={todo} key={todo} />
+                        <FormControlLabel onChange={e => handleChange(e)} control={<Checkbox />} label={todo} key={todo} />
                         {/* <FormControlLabel control={<Checkbox/>} label="Todo Item #2" /> */}
                     </FormGroup>
 
