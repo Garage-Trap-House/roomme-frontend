@@ -20,6 +20,7 @@ import { Route, BrowserRouter, Switch as RouterSwitch } from 'react-router-dom';
 import { initializeApp } from 'firebase/app'
 import HouseMates from './components/housemates';
 import ToDoList2 from'./components/ToDoList2'; 
+import Alerts from './components/alerts';
 
 const App = () => {
 
@@ -55,6 +56,10 @@ const App = () => {
 
         <Route exact path="/housemates">
           <HouseMates/>
+        </Route>
+
+        <Route exact path="/alerts">
+          <Alerts/>
         </Route>
 
       </RouterSwitch>
