@@ -138,11 +138,9 @@ const Profile = () => {
                         Houses
                     </Button>
 
-                    <div className='logoutButton'>
-                        <Button variant='contained' style={{ fontSize: '20px', backgroundColor: '#97D8C4', color: "#FFFFFF", minHeight: '80px', minWidth: '350px' }}>
-                            Sign Out
-                        </Button>
-                    </div>
+                    <Button variant='contained' style={{ fontSize: '20px', backgroundColor: '#97D8C4', color: "#FFFFFF", minHeight: '80px', minWidth: '450px' }}>
+                        Sign Out
+                    </Button>
 
                 </Stack>
 
