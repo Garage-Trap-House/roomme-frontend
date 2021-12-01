@@ -12,6 +12,7 @@ import Axios from 'axios';
 import { useHistory } from "react-router-dom";
 
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
+import { bgcolor } from '@mui/system';
 
 const Profile = () => {
 
@@ -83,7 +84,11 @@ const Profile = () => {
                 </Toolbar>
             </AppBar>
             <div className="avatar">
-                <Avatar sx={{ height: '190px', width: '190px' }} src={cowboyturtle} />
+                <Avatar sx={{ height: '190px', width: '190px', backgroundColor: "#4059AD"}}>
+                    <Typography variant="h1">
+                    {userName[0]}
+                    </Typography>
+                </Avatar>
 
             </div>
 

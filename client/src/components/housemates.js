@@ -85,7 +85,11 @@ const HouseMates = () => {
                     <Grid container direction="row" alignItems='center'>
                         <Button component={RouterLink} to={{ pathname: "/todo", state: { id: 1, username: useruid, todouser: housemate, housename: house} }}>
                         <Grid item>
-                            <Avatar alt="Cowboy Turtle" sx={{ height: '190px', width: '190px', marginBottom: '30px', marginRight: '20px' }} src={cowboyturtle} />
+                            <Avatar alt="Profile Picture" sx={{ height: '190px', width: '190px', marginBottom: '30px', marginRight: '20px', backgroundColor: "#4059AD" }}>
+                                <Typography variant="h1">
+                                    {housemate[0]}
+                                </Typography>
+                            </Avatar>
                         </Grid>
                         <Grid item>
                             <Typography style={{ fontSize: 18 }}>

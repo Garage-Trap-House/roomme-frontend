@@ -84,7 +84,7 @@ const AlertPage = () => {
                     <Card sx={{ width: 1000, margin: 1 }}>
                     <CardHeader
                         avatar={
-                        <Avatar sx={{ bgcolor: red[500], width: 50, height: 50, }} aria-label="person">
+                        <Avatar sx={{ backgroundColor: "#4059AD", width: 50, height: 50, }} aria-label="person">
                             {/* User's first letter of their name is displayed as a pfp. */}
                             {elem.user[0]}
                         </Avatar>
