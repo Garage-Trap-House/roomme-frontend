@@ -7,6 +7,7 @@ import cowboyturtle from '../assets/images/cowboy_turtle.jpg';
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
 import "./housemates.css"
 import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCircle';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import { Style } from '@mui/icons-material';
@@ -61,6 +62,9 @@ const HouseMates = () => {
                     </IconButton>
                     <IconButton style={{color: 'white'}} component={RouterLink} to={{ pathname: "/todo", state: { id: 1, housename: house , username: useruid } }}>
                         <PlaylistAddCheckCircleIcon />
+                    </IconButton>
+                    <IconButton style={{color: 'white'}} component={RouterLink} to={{ pathname: "/alerts", state: { id: 1, housename: house , username: useruid } }}>
+                        <NotificationsIcon />
                     </IconButton>
                     <IconButton style={{color: 'white'}} component={RouterLink} to={{ pathname: "/profile", state: { username: useruid } }}>
                         <PersonIcon />
