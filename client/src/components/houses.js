@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AppBar, Toolbar, Typography, Button, Modal, Box, Grid, Avatar, TextField, Link, Card, CardMedia, CardActionArea } from '@mui/material'
+import { AppBar, Toolbar, Typography, Button, Modal, Box, Grid, Avatar, TextField, Link, Card, CardMedia, CardActionArea, CardHeader } from '@mui/material'
 import logo from '../assets/images/Room.me Logo White Crop.png';
 import turtle from '../assets/images/turtle.png';
 import Axios from 'axios';
@@ -77,18 +77,21 @@ const Houses = () => {
                     <CardActionArea component={RouterLink} to={{ pathname: "/housemates", state: { id: 1, housename: house , username: useruid } }} >
 
                         <Card raised='true' sx={{ display: 'flex' }} style={{ marginBottom: "50px" }}>
-
-                            <CardMedia
+                            <CardHeader
+                                avatar={
+                                    <Avatar sx={{ backgroundColor: "#F4B942", width: 75, height: 75, }} aria-label="person">
+                                        {house[0] + house[1]}
+                                    </Avatar>
+                                    }
+                                    titleTypographyProps={{variant: 'h2'}}
+                                    title={house}
+                                />
+                            {/* <CardMedia
                                 component="img"
                                 style={{ height: "150px", width: "200px", paddingTop: "2%", alignItems: "left" }}
                                 sx={{ width: 200 }}
                                 image={turtle}>
-                            </CardMedia>
-                            <Box>
-                                <Typography variant="subtitle1" color="text.secondary" component="div" key={house}>
-                                    {house}
-                                </Typography>
-                            </Box>
+                            </CardMedia> */}
                         </Card>
                     </CardActionArea>)}
 
