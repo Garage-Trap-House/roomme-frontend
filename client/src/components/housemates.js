@@ -50,6 +50,16 @@ const HouseMates = () => {
         });
     }
 
+    function addHousemate(){
+        Axios.post('http://localhost:3001/addHousemates', {
+            housename: house,
+            newEmail: name
+        }).then((response) => {
+            //houses = response.data
+            setAddedHouseMate(response.data)
+        });
+    }
+
 
 
     return (
@@ -111,16 +121,19 @@ const HouseMates = () => {
                 <Modal open={open} onClose={handleClose}>
                     <Box sx={style}>
                         <Grid align = 'center'>
-                            <h2>Add House</h2>
+                            <h2>Add Housemate</h2>
                         </Grid>
                         <TextField
-                        label='House Name'
-                        placeholder='Enter House Name'
+                        label='Housemates'
+                        placeholder='Enter email'
                         margin = 'normal'
                         fullWidth
                         required
                         onChange={(e) => setAddedHouseMate(e.target.value)}
                         />
+                        <Grid align='center'>
+                            <Button style={{ backgroundColor: "#6B9AC4" }} variant='contained' onClick={addHousemate}> Submit </Button>
+                        </Grid>
                     </Box>
                 </Modal>
             </div>

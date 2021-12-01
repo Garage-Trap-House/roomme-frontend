@@ -162,7 +162,7 @@ const ToDoList2 = () => {
 
             </div>
             <div className='addButton'>
-                <Button onClick={handleOpen} variant='contained' style={{ backgroundColor: "#6B9AC4" }}>Add Task</Button>
+                <Button onClick={handleOpen} variant='contained' style={{background: '#6B9AC4', position: 'fixed', bottom: 16, right: 16,}}>Add Task</Button>
                 <Modal open={open} onClose={handleClose}>
                     <Box sx={style}>
                         <Grid align='center'>
