@@ -4,6 +4,7 @@ import logo from '../assets/images/Room.me Logo White Crop.png';
 import OtherHousesIcon from '@mui/icons-material/OtherHouses';
 import PersonIcon from '@mui/icons-material/Person';
 import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCircle';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Axios from 'axios';
@@ -60,6 +61,37 @@ const ToDoList2 = () => {
         setOpen(false)
     }
 
+    function checkName1(){
+        Axios.post('http://localhost:3001/getName', {
+            useruid: useruid
+        }).then((response) => {
+            setName(response.data)
+        });
+        deleteChores(userName)
+    }
+
+    function deleteChores(userName) {
+        console.log(location.state.task + "hi")
+        // console.log(userName + 'hi')
+        // console.log(taskName)
+        // Axios.post('http://localhost:3001/deleteChores', {
+        //     housename: house,
+        //     assignedTo: userName,
+        //     task: todo
+        // }).then((response) => {
+        //     //houses = response.data
+        //     setToDo(response.data)
+        //     console.log('success')
+        // });
+        // setOpen(false)
+    }
+
+    const handleChange = (e) =>{
+        let isChecked= e.target.checked;
+        console.log(isChecked +'hi')
+        console.log(e.target)
+    }
+
     function getToDo() {
         Axios.post('http://localhost:3001/getChores', {
             housename: house,
@@ -96,6 +128,9 @@ const ToDoList2 = () => {
                     <IconButton style={{ color: 'white' }} onClick={getName} >
                         <PlaylistAddCheckCircleIcon />
                     </IconButton>
+                    <IconButton style={{color: 'white'}} component={RouterLink} to={{ pathname: "/alerts", state: { id: 1, housename: house , username: useruid } }}>
+                            <NotificationsIcon />
+                        </IconButton>
                     <IconButton style={{ color: 'white' }} component={RouterLink} to={{ pathname: "/profile", state: { username: useruid } }}>
                         <PersonIcon />
                     </IconButton>
@@ -118,7 +153,7 @@ const ToDoList2 = () => {
                 <Typography sx={{ fontSize: 23 }}>{userToDo}</Typography>
                 {todoList.map((todo) =>
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox />} label={todo} key={todo} />
+                        <FormControlLabel onChange={e => handleChange(e)} control={<Checkbox />} label={todo} key={todo} />
                         {/* <FormControlLabel control={<Checkbox/>} label="Todo Item #2" /> */}
                     </FormGroup>
 

@@ -7,6 +7,7 @@ import cowboyturtle from '../assets/images/cowboy_turtle.jpg';
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
 import "./housemates.css"
 import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCircle';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import { Style } from '@mui/icons-material';
@@ -62,6 +63,9 @@ const HouseMates = () => {
                     <IconButton style={{color: 'white'}} component={RouterLink} to={{ pathname: "/todo", state: { id: 1, housename: house , username: useruid } }}>
                         <PlaylistAddCheckCircleIcon />
                     </IconButton>
+                    <IconButton style={{color: 'white'}} component={RouterLink} to={{ pathname: "/alerts", state: { id: 1, housename: house , username: useruid } }}>
+                        <NotificationsIcon />
+                    </IconButton>
                     <IconButton style={{color: 'white'}} component={RouterLink} to={{ pathname: "/profile", state: { username: useruid } }}>
                         <PersonIcon />
                     </IconButton>
@@ -81,7 +85,11 @@ const HouseMates = () => {
                     <Grid container direction="row" alignItems='center'>
                         <Button component={RouterLink} to={{ pathname: "/todo", state: { id: 1, username: useruid, todouser: housemate, housename: house} }}>
                         <Grid item>
-                            <Avatar alt="Cowboy Turtle" sx={{ height: '190px', width: '190px', marginBottom: '30px', marginRight: '20px' }} src={cowboyturtle} />
+                            <Avatar alt="Profile Picture" sx={{ height: '190px', width: '190px', marginBottom: '30px', marginRight: '20px', backgroundColor: "#4059AD" }}>
+                                <Typography variant="h1">
+                                    {housemate[0]}
+                                </Typography>
+                            </Avatar>
                         </Grid>
                         <Grid item>
                             <Typography style={{ fontSize: 18 }}>
