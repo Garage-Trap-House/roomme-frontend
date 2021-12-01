@@ -124,67 +124,90 @@ app.post('/createHouse' , (req, res) => {
 })
 
 
-// app.post('/addHousemates' , (req, res) => {
-//   const useruid = req.body.useruid
-//   const housename = req.body.housename
-//   const newEmail = req.body.newEmail
+app.post('/addHousemates' , (req, res) => {
+  const housename = req.body.housename
+  const newEmail = req.body.newEmail
 
-//   const docRef = db.collection('testingusers').doc(useruid)
+  var newHousemate
 
-//   const ref = db.collection('testingusers');
-//   //const snapshot = ref.get();
+    db.collection('testingusers').get()
+    .then((querySnapshot) => {
+      querySnapshot.docs.forEach(doc => {
+        var data = doc.data()
 
-//   // const snapshot = db.collection('testingusers').get()
-//   //   snapshot.docs.map(doc => doc.data());
+        const email = '"'+ newEmail+'"'
+        console.log(data.Email)
 
-//     db.collection('testingusers').get()
-//     .then((querySnapshot) => {
-//       console.log(querySnapshot)
-//     });
-//     });
-
-//   // snapshot.then(function(doc) {
-//   //   if (doc.exists) {
-//   //     var data = doc.data();
-//   //     console.log(data.id)
-
-//   //   } else {
-//   //     console.log("No such document!");
-//   //   }
-//   // }).catch(function(error) {
-//   //   console.log("Error getting document:", error);
-//   // });
-
-//   // const arr = ['cat', 'dog', 'fish'];
-//   // arr.forEach(element => {
-//   //   console.log(element);
-//   // });
-//   //     snapshot.forEach(doc => {
-//   //     console.log(doc.id, '=>', doc.data());
-//   //     });
-
-//    //     docRef.listCollections().then(collections => {
-//   //       //for (let collection of collections) {
+        if (data.Email == email){
+          newHousemate = doc.id
+          // adds them to the house's housemate list
+          const houseRef = db.collection('testinghouses').doc(housename)
+          houseRef.update({
+            housemates: FieldValue.arrayUnion(newEmail)
+          });
           
-//   //         for (let i = 0; i < amtOfhousemates; i++){
-//   //           //console.log(`Found collection with id: ${collections[i].id}`);
-//   //           subcollection[i] = collections[i].id
+          // adds them to the user's list of house references
+          const newHouse = "/testinghouses/" + housename
+          let houseName = db.doc(newHouse)
+          const docRef = db.collection('testingusers').doc(newHousemate)
+          docRef.update({
+            houses: FieldValue.arrayUnion(houseName)
+          });
 
-//   // docRef.get().then(function(doc) {
-//   //   if (doc.exists) {
-//   //     const docRef = db.collection('testinghouses').doc(housename)
-//   //     docRef.update({
-//   //       housemates: FieldValue.arrayUnion(newEmail)
-//   //     });      
+          // adds them into the todo list for the house
+          const chore = {
+            chores : ['check the todo list']
+          }    
+          db.collection('testingtodo').doc(housename).collection(newEmail).doc('todolist').set(chore)
 
-//   //   } else {
-//   //     console.log("error try again")
-//   //   }
-//   // }).catch(function(error) {
-//   //   console.log("Error getting document:", error);
-//   // });
 
-// })
+        }
+      })
+    });
+
+
+  // snapshot.then(function(doc) {
+  //   if (doc.exists) {
+  //     var data = doc.data();
+  //     console.log(data.id)
+
+  //   } else {
+  //     console.log("No such document!");
+  //   }
+  // }).catch(function(error) {
+  //   console.log("Error getting document:", error);
+  // });
+
+  // const arr = ['cat', 'dog', 'fish'];
+  // arr.forEach(element => {
+  //   console.log(element);
+  // });
+  //     snapshot.forEach(doc => {
+  //     console.log(doc.id, '=>', doc.data());
+  //     });
+
+   //     docRef.listCollections().then(collections => {
+  //       //for (let collection of collections) {
+          
+  //         for (let i = 0; i < amtOfhousemates; i++){
+  //           //console.log(`Found collection with id: ${collections[i].id}`);
+  //           subcollection[i] = collections[i].id
+
+  // docRef.get().then(function(doc) {
+  //   if (doc.exists) {
+  //     const docRef = db.collection('testinghouses').doc(housename)
+  //     docRef.update({
+  //       housemates: FieldValue.arrayUnion(newEmail)
+  //     });      
+
+  //   } else {
+  //     console.log("error try again")
+  //   }
+  // }).catch(function(error) {
+  //   console.log("Error getting document:", error);
+  // });
+
+})
 
 app.post('/getChores' , (req, res) => {
   const housename = req.body.housename
