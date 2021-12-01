@@ -106,7 +106,7 @@ const AlertPage = () => {
             </div>
 
             <div>
-                <Fab style={{background: '#6B9AC4', position: 'absolute', bottom: 16, right: 16,}} aria-label="add" onClick={handleOpen}>
+                <Fab style={{background: '#6B9AC4', position: 'fixed', bottom: 16, right: 16,}} aria-label="add" onClick={handleOpen}>
                     <AddIcon style={{color: "white"}}/>
                 </Fab>
             </div>

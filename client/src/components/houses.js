@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AppBar, Toolbar, Typography, Button, Modal, Box, Grid, Avatar, TextField, Link, Card, CardMedia, CardActionArea, CardHeader } from '@mui/material'
+import { AppBar, Toolbar, Typography, Button, Modal, Box, Grid, Avatar, TextField, Link, Card, CardMedia, CardActionArea, CardHeader, Fab } from '@mui/material'
 import logo from '../assets/images/Room.me Logo White Crop.png';
 import turtle from '../assets/images/turtle.png';
 import Axios from 'axios';
@@ -8,7 +8,8 @@ import LockIcon from '@mui/icons-material/Lock'
 import "./houses.css"
 import { useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
-import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import AddIcon from '@mui/icons-material/Add';
 
 const Houses = () => {
 
@@ -135,9 +136,9 @@ const Houses = () => {
             </div>
 
             <div>
-                <Button style={{backgroundColor: "#6B9AC4"}}variant='contained' onClick={handleOpen}>
-                    Create House
-                </Button>
+                <Fab style={{background: '#6B9AC4', position: 'fixed', bottom: 16, right: 16,}}variant='contained' onClick={handleOpen}>
+                    <AddIcon style={{color: "white"}}/>
+                </Fab>
 
                 <Modal open={open} onClose={handleClose}>
                     <Box sx={style}>

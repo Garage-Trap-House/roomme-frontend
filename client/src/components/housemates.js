@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AppBar, Toolbar, Typography, Button, IconButton, Modal, Box, Grid, Avatar, TextField, Link, Card, CardMedia, CardActionArea, Stack, AvatarGroup } from '@mui/material'
+import { AppBar, Toolbar, Typography, Button, IconButton, Modal, Box, Grid, Avatar, TextField, Link, Card, CardMedia, CardActionArea, Stack, AvatarGroup, Fab } from '@mui/material'
 import logo from '../assets/images/Room.me Logo White Crop.png';
 import OtherHousesIcon from '@mui/icons-material/OtherHouses';
 import PersonIcon from '@mui/icons-material/Person';
@@ -8,9 +8,11 @@ import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'reac
 import "./housemates.css"
 import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import AddIcon from '@mui/icons-material/Add';
 import { useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import { Style } from '@mui/icons-material';
+
 
 const HouseMates = () => {
 
@@ -103,7 +105,9 @@ const HouseMates = () => {
 
             </div>
             <div className='addButton'>
-                <Button style={{backgroundColor: "#6B9AC4"}} onClick={handleOpen} variant='contained'>+</Button>
+                <Fab style={{background: '#6B9AC4', position: 'fixed', bottom: 16, right: 16,}} onClick={handleOpen} variant='contained'>
+                    <AddIcon style={{color: "white"}}/>
+                </Fab>
                 <Modal open={open} onClose={handleClose}>
                     <Box sx={style}>
                         <Grid align = 'center'>
