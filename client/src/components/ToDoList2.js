@@ -4,6 +4,7 @@ import logo from '../assets/images/Room.me Logo White Crop.png';
 import OtherHousesIcon from '@mui/icons-material/OtherHouses';
 import PersonIcon from '@mui/icons-material/Person';
 import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCircle';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Axios from 'axios';
@@ -127,6 +128,9 @@ const ToDoList2 = () => {
                     <IconButton style={{ color: 'white' }} onClick={getName} >
                         <PlaylistAddCheckCircleIcon />
                     </IconButton>
+                    <IconButton style={{color: 'white'}} component={RouterLink} to={{ pathname: "/alerts", state: { id: 1, housename: house , username: useruid } }}>
+                            <NotificationsIcon />
+                        </IconButton>
                     <IconButton style={{ color: 'white' }} component={RouterLink} to={{ pathname: "/profile", state: { username: useruid } }}>
                         <PersonIcon />
                     </IconButton>
