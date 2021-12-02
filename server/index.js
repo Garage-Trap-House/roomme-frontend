@@ -165,48 +165,6 @@ app.post('/addHousemates' , (req, res) => {
       })
     });
 
-
-  // snapshot.then(function(doc) {
-  //   if (doc.exists) {
-  //     var data = doc.data();
-  //     console.log(data.id)
-
-  //   } else {
-  //     console.log("No such document!");
-  //   }
-  // }).catch(function(error) {
-  //   console.log("Error getting document:", error);
-  // });
-
-  // const arr = ['cat', 'dog', 'fish'];
-  // arr.forEach(element => {
-  //   console.log(element);
-  // });
-  //     snapshot.forEach(doc => {
-  //     console.log(doc.id, '=>', doc.data());
-  //     });
-
-   //     docRef.listCollections().then(collections => {
-  //       //for (let collection of collections) {
-          
-  //         for (let i = 0; i < amtOfhousemates; i++){
-  //           //console.log(`Found collection with id: ${collections[i].id}`);
-  //           subcollection[i] = collections[i].id
-
-  // docRef.get().then(function(doc) {
-  //   if (doc.exists) {
-  //     const docRef = db.collection('testinghouses').doc(housename)
-  //     docRef.update({
-  //       housemates: FieldValue.arrayUnion(newEmail)
-  //     });      
-
-  //   } else {
-  //     console.log("error try again")
-  //   }
-  // }).catch(function(error) {
-  //   console.log("Error getting document:", error);
-  // });
-
 })
 
 app.post('/getChores' , (req, res) => {

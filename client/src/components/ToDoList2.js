@@ -22,9 +22,10 @@ const ToDoList2 = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    //history.go(0)
     const [taskName, setTaskName] = useState('')
     const [assigned, setAssignedName] = useState('')
+    var choreChecked
+    var todoName
 
     const style = {
         position: 'absolute',
@@ -61,35 +62,32 @@ const ToDoList2 = () => {
         setOpen(false)
     }
 
-    function checkName1(){
+    function checkName1(todoName){
         Axios.post('http://localhost:3001/getName', {
             useruid: useruid
         }).then((response) => {
             setName(response.data)
         });
-        deleteChores(userName)
+        deleteChores(todoName, userName)
     }
 
-    function deleteChores(userName) {
-        console.log(location.state.task + "hi")
-        // console.log(userName + 'hi')
-        // console.log(taskName)
-        // Axios.post('http://localhost:3001/deleteChores', {
-        //     housename: house,
-        //     assignedTo: userName,
-        //     task: todo
-        // }).then((response) => {
-        //     //houses = response.data
-        //     setToDo(response.data)
-        //     console.log('success')
-        // });
-        // setOpen(false)
+    function deleteChores(todoName, userName) {
+        Axios.post('http://localhost:3001/deleteChores', {
+            housename: house,
+            assignedTo: userName,
+            task: todoName
+        }).then((response) => {
+            setToDo(response.data)
+            console.log('success')
+        });
     }
 
-    const handleChange = (e) =>{
-        let isChecked= e.target.checked;
-        console.log(isChecked +'hi')
-        console.log(e.target)
+    const handleChange = (e, choreChecked) =>{
+
+        console.log(choreChecked)
+        todoName = todoList[choreChecked]
+        checkName1(todoName)
+
     }
 
     function getToDo() {
@@ -112,8 +110,6 @@ const ToDoList2 = () => {
         history.push({ pathname: "/todo", state: { id: 1, username: useruid, todouser: userName, housename: house } })
 
     }
-    // 
-
 
     return (
         <div>
@@ -144,29 +140,32 @@ const ToDoList2 = () => {
                 </Typography>
 
                 <Typography>
-                    Dummy House Name
+                    {house}
                 </Typography>
             </div>
 
             {/* {todoList.map((todo) =>  )} */}
             <div className='housemate'>
                 <Typography sx={{ fontSize: 23 }}>{userToDo}</Typography>
-                {todoList.map((todo) =>
+                {todoList.map((todo, index) =>
                     <FormGroup>
-                        <FormControlLabel onChange={e => handleChange(e)} control={<Checkbox />} label={todo} key={todo} />
+                        {/* onChange={e => handleChange(e)}  , hi(hu = index) */}
+                        <FormControlLabel  onChange={e => handleChange(e, choreChecked = index)} control={<Checkbox />} label={todo} key={todo} />
+                        {/* <Button style={{ backgroundColor: "#6B9AC4" }} variant='contained' onClick={e => deleteChore(e, choreChecked)}> Submit </Button>  */}
+                        
                         {/* <FormControlLabel control={<Checkbox/>} label="Todo Item #2" /> */}
-                    </FormGroup>
+                    </FormGroup>   
 
                 )}
 
-
             </div>
+            
             <div className='addButton'>
                 <Button onClick={handleOpen} variant='contained' style={{ backgroundColor: "#6B9AC4" }}>Add Task</Button>
                 <Modal open={open} onClose={handleClose}>
                     <Box sx={style}>
                         <Grid align='center'>
-                            <h2>Add House</h2>
+                            <h2>Add Task</h2>
                         </Grid>
                         <TextField
                             label='Chore Name'
