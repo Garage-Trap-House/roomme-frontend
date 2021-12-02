@@ -172,6 +172,7 @@ app.post('/getChores' , (req, res) => {
   const name = req.body.name
   
   const docRef = db.collection('testingtodo').doc(housename).collection(name).doc('todolist')
+  console.log(name)
 
   docRef.get().then(function(doc) {
     if (doc.exists) {

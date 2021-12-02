@@ -58,6 +58,8 @@ const HouseMates = () => {
             //houses = response.data
             setAddedHouseMate(response.data)
         });
+        
+        setOpen(false);
     }
 
 

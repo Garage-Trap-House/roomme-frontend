@@ -49,7 +49,6 @@ const ToDoList2 = () => {
     }
 
     function addChores(userName) {
-        console.log(userName + 'hi')
         Axios.post('http://localhost:3001/addChores', {
             housename: house,
             assignedTo: userName,
