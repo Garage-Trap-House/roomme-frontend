@@ -44,7 +44,7 @@ const Houses = () => {
     const[houseName, setHouseName] = useState('')
 
     function getHouses() {
-        Axios.post('http://localhost:3001/checkHouses', {
+        Axios.post('http://roomme-backend.uc.r.appspot.com/checkHouses', {
             useruid:useruid
         }).then((response) => {
             setHouse(response.data)
@@ -52,7 +52,7 @@ const Houses = () => {
     }
 
     function createHouse() {
-        Axios.post('http://localhost:3001/createHouse', {
+        Axios.post('http://roomme-backend.uc.r.appspot.com/createHouse', {
             useruid:useruid,
             housename:houseName
         }).then((response) => {

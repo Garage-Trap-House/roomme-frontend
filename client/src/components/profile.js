@@ -41,7 +41,7 @@ const Profile = () => {
     let history = useHistory();
 
     function getName() {
-        Axios.post('http://localhost:3001/getName', {
+        Axios.post('http://roomme-backend.uc.r.appspot.com/getName', {
             useruid: useruid
         }).then((response) => {
             setName(response.data)

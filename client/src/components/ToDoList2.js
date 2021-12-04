@@ -40,7 +40,7 @@ const ToDoList2 = () => {
     };
 
     function checkName(){
-        Axios.post('http://localhost:3001/getName', {
+        Axios.post('http://roomme-backend.uc.r.appspot.com/getName', {
             useruid: useruid
         }).then((response) => {
             setName(response.data)
@@ -49,7 +49,7 @@ const ToDoList2 = () => {
     }
 
     function addChores(userName) {
-        Axios.post('http://localhost:3001/addChores', {
+        Axios.post('http://roomme-backend.uc.r.appspot.com/addChores', {
             housename: house,
             assignedTo: userName,
             task: taskName
@@ -62,7 +62,7 @@ const ToDoList2 = () => {
     }
 
     function checkName1(todoName){
-        Axios.post('http://localhost:3001/getName', {
+        Axios.post('http://roomme-backend.uc.r.appspot.com/getName', {
             useruid: useruid
         }).then((response) => {
             setName(response.data)
@@ -71,7 +71,7 @@ const ToDoList2 = () => {
     }
 
     function deleteChores(todoName, userName) {
-        Axios.post('http://localhost:3001/deleteChores', {
+        Axios.post('http://roomme-backend.uc.r.appspot.com/deleteChores', {
             housename: house,
             assignedTo: userName,
             task: todoName
@@ -90,7 +90,7 @@ const ToDoList2 = () => {
     }
 
     function getToDo() {
-        Axios.post('http://localhost:3001/getChores', {
+        Axios.post('http://roomme-backend.uc.r.appspot.com/getChores', {
             housename: house,
             name: userToDo
         }).then((response) => {
@@ -101,7 +101,7 @@ const ToDoList2 = () => {
     }
 
     function getName() {
-        Axios.post('http://localhost:3001/getName', {
+        Axios.post('http://roomme-backend.uc.r.appspot.com/getName', {
             useruid: useruid
         }).then((response) => {
             setName(response.data)

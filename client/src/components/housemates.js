@@ -42,7 +42,7 @@ const HouseMates = () => {
     };
 
     function getHousemates() {
-        Axios.post('http://localhost:3001/getHousemates', {
+        Axios.post('http://roomme-backend.uc.r.appspot.com/getHousemates', {
             housename: house
         }).then((response) => {
             //houses = response.data
@@ -51,7 +51,7 @@ const HouseMates = () => {
     }
 
     function addHousemate(){
-        Axios.post('http://localhost:3001/addHousemates', {
+        Axios.post('http://roomme-backend.uc.r.appspot.com/addHousemates', {
             housename: house,
             newEmail: name
         }).then((response) => {
