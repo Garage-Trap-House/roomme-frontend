@@ -30,8 +30,8 @@ app.use(function(req,res,next) {
 const serviceAccount = require('./ServiceAccountKey.json');
 const admin = require('firebase-admin');
 const FieldValue = require('firebase-admin').firestore.FieldValue;
-const { snapshotConstructor } = require('firebase-functions/v1/firestore')
-const { DataSnapshot } = require('firebase-functions/v1/database')
+// const { snapshotConstructor } = require('firebase-functions/v1/firestore')
+// const { DataSnapshot } = require('firebase-functions/v1/database')
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
