@@ -134,18 +134,18 @@ const ToDoList2 = () => {
             <div className='Todo'>
                 {/* <Button onClick={getToDo}> Name </Button> */}
                 <Button onClick={getToDo}> ToDo List </Button>
-                <Typography sx={{ fontSize: 35, fontWeight: 600 }}>
+                <Typography sx={{ fontSize: 50, fontWeight: 600 }}>
                     Todo List
                 </Typography>
 
-                <Typography>
+                <Typography sx={{ fontSize: 45}}>
                     {house}
                 </Typography>
             </div>
 
             {/* {todoList.map((todo) =>  )} */}
             <div className='housemate'>
-                <Typography sx={{ fontSize: 23 }}>{userToDo}</Typography>
+                <Typography sx={{ fontSize: 30 }}>{userToDo}</Typography>
                 {todoList.map((todo, index) =>
                     <FormGroup>
                         {/* onChange={e => handleChange(e)}  , hi(hu = index) */}

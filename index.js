@@ -1,14 +1,17 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
+const path = require('path')
 
 //https://stackoverflow.com/questions/47876754/query-firestore-database-for-document-id
 
 // https://abhik-b.medium.com/short-guide-to-firestore-reference-data-type-9c9197e4b9ee
 
 app.use(cors({
-  origin: '*'
+  origin: '/'
 }))
+
+app.use(express.static(path.join(__dirname + '/client/build')));
 
 app.use(
   express.urlencoded({
@@ -17,6 +20,12 @@ app.use(
 )
 
 app.use(express.json())
+
+app.use(function(req,res,next) {
+  res.header("Access-Control-Allow-Origin", "http://roomme-backend.uc.r.appspot.com");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 const serviceAccount = require('./ServiceAccountKey.json');
 const admin = require('firebase-admin');
@@ -350,8 +359,11 @@ app.post('/getHousemates', (req, res) => {
 
 })
 
-const port = process.env.PORT || 3001;
+app.get('/*', (req,res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+const port = process.env.PORT || 8080;
 
-app.listen(3001, () => {
-	console.log("Server started at port 3001");
+app.listen(8080, () => {
+	console.log("Server started at port 8080");
 });
